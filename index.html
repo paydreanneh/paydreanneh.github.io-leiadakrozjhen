@@ -1,137 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Leiada Krözjhen — Automotive Photography</title>
-    <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin />
-    <link href="https://fonts.cdnfonts.com/css/shadow-whisper" rel="stylesheet" />
-    <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leiada Krözjhen — Automotive Photography</title>
+<link href="https://fonts.cdnfonts.com/css/shadow-whisper" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- ════════════════════════════════════════
-         NAV (sticky, inside page-wrapper)
-    ════════════════════════════════════════ -->
-    <div style="position:sticky;top:0;z-index:100;background:rgba(250,249,247,0.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);">
-        <div class="page-wrapper">
-            <nav>
-                <a href="https://www.leiadakrozjhen.com" class="logo">Leiada Krözjhen</a>
-                <div class="nav-right">
-                    <ul class="nav-links">
-                        <li><a href="https://www.leiadakrozjhen.com" class="active">Work</a></li>
-                        <li><a href="https://www.leiadakrozjhen.com/book-me">Book Me</a></li>
-                        <li><a href="https://www.leiadakrozjhen.com/prints">Prints</a></li>
-                        <li><a href="https://www.leiadakrozjhen.com/blog">Blog</a></li>
-                        <li><a href="https://www.leiadakrozjhen.com/contact">Contact</a></li>
-                    </ul>
-                    <a href="https://instagram.com/leiadakrozjhen" class="social-icon" aria-label="Instagram">
-                        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
-                    </a>
-                </div>
-                <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-                    <span></span><span></span><span></span>
-                </button>
-            </nav>
+
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Leiada Krözjhen</a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Work</a></li>
+        <li><a href="book.html">Book Me</a></li>
+        <li><a href="prints.html">Prints</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="https://instagram.com/leiadakrozjhen" target="_blank" class="nav-ig" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <button class="nav-burger" id="burgerBtn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="index.html" class="active">Work</a></li>
+    <li><a href="book.html">Book Me</a></li>
+    <li><a href="prints.html">Prints</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="ig-row">
+    <a href="https://instagram.com/leiadakrozjhen" target="_blank">
+      <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      leiadakrozjhen
+    </a>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="hero-text">
+    <h1>Through the lens,<br><em>the machine becomes art.</em></h1>
+    <p>Automotive Photography · Charlotte, NC</p>
+  </div>
+  <div class="gallery-grid" id="gallery"></div>
+</div>
+
+<div class="brands-strip">
+  <div class="brands-inner">
+    <img src="https://logos-world.net/wp-content/uploads/2021/08/Genesis-Logo.png" alt="Genesis">
+    <img src="https://assets.zyrosite.com/Yg2qM2WwDGcqEloG/porsche-white-logo-7020-ENRshbxYaW6Shj6y.png" alt="Porsche">
+    <img src="https://assets.zyrosite.com/Yg2qM2WwDGcqEloG/acj-logoweb_black-bhL919r9p2ilqya2.png" alt="Alvin C. Jacobs Jr.">
+  </div>
+</div>
+
+<div class="wrap">
+  <section class="about-section">
+    <div class="about-grid">
+      <div class="about-img-wrap reveal">
+        <div class="about-photo-placeholder">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          <span>Your photo here</span>
         </div>
+      </div>
+      <div class="about-text reveal">
+        <p class="eyebrow">Behind the camera</p>
+        <h2>Hello, I'm<br>Paydreanne.</h2>
+        <p>Also known as <em>"Leiada Krözjhen"</em> — I'm an automotive photographer based in Charlotte, NC. I've been shooting since 2018, capturing street portraits, architecture, community events, and more.</p>
+        <p>After landing a real-estate photography job in 2024, I quickly found myself dissatisfied with the routine of it all. Meanwhile I was deep in Forza Horizon 5, obsessing over the graphics and unique looks of different cars.</p>
+        <blockquote class="quote">"What if I tried out car photography?"</blockquote>
+        <p>In 2025, I made the switch — collaborating with my local Porsche and Genesis dealerships, and continuing to push the limits of what automotive imagery can look like.</p>
+        <a href="book.html" class="cta-link">
+          Book a session
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
     </div>
+  </section>
+</div>
 
-    <!-- ════════════════════════════════════════
-         HERO
-    ════════════════════════════════════════ -->
-    <div class="page-wrapper">
-        <div class="hero">
-            <p class="hero-eyebrow">Automotive Photography · Charlotte, NC</p>
-            <h1 class="hero-title">Leiada Krözjhen</h1>
-            <p class="hero-sub">Capturing machines the way they deserve to be seen</p>
-            <div class="hero-rule"></div>
-        </div>
+<footer>
+  <div class="footer-wrap">
+    <div class="footer-brand reveal">
+      <a href="index.html" class="footer-logo-text">Leiada Krözjhen</a>
+      <span class="footer-tagline">Automotive Photography · Charlotte, NC</span>
+      <a href="https://instagram.com/leiadakrozjhen" target="_blank" class="footer-ig">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+        leiadakrozjhen
+      </a>
     </div>
-
-    <!-- ════════════════════════════════════════
-         GALLERY
-    ════════════════════════════════════════ -->
-    <div class="page-wrapper gallery-section">
-        <div class="gallery-grid" id="gallery"></div>
-    </div>
-
-    <!-- ════════════════════════════════════════
-         FOOTER
-    ════════════════════════════════════════ -->
-    <div class="footer-wrapper">
-        <div class="page-wrapper">
-            <footer>
-                <div class="footer-brand reveal">
-                    <a href="#" class="footer-logo">Leiada Krözjhen</a>
-                    <span class="footer-tagline">Automotive Photography · Charlotte, NC</span>
-                    <a href="https://instagram.com/leiadakrozjhen" class="social-link" aria-label="Instagram">
-                        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
-                        leiadakrozjhen
-                    </a>
-                </div>
-                <div class="footer-grid">
-                    <div class="footer-col reveal">
-                        <h4>Navigate</h4>
-                        <ul class="footer-nav">
-                            <li><a href="https://www.leiadakrozjhen.com">Work</a></li>
-                            <li><a href="https://www.leiadakrozjhen.com/book-me">Book Me</a></li>
-                            <li><a href="https://www.leiadakrozjhen.com/prints">Prints</a></li>
-                            <li><a href="https://www.leiadakrozjhen.com/blog">Blog</a></li>
-                            <li><a href="https://www.leiadakrozjhen.com/contact">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col reveal">
-                        <h4>Get In Touch</h4>
-                        <ul class="contact-list">
-                            <li>
-                                <span class="icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
-                                <a href="mailto:hello@leiadakrozjhen.com">hello@leiadakrozjhen.com</a>
-                            </li>
-                            <li>
-                                <span class="icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.04 1.23 2 2 0 012 .04h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></span>
-                                <span>1-704-412-8273 (text only)</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="footer-col reveal">
-                        <h4>Service Area</h4>
-                        <span class="area-label">Within 30 miles of Charlotte, NC</span>
-                        <div class="regions">
-                            <span class="region-tag">Charlotte, NC</span>
-                            <span class="region-tag">Huntersville, NC</span>
-                            <span class="region-tag">Harrisburg, NC</span>
-                            <span class="region-tag">Monroe, NC</span>
-                            <span class="region-tag">Rock Hill, SC</span>
-                            <span class="region-tag">Mt. Holly, NC</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <p>&copy; <span id="year"></span> Leiada Krözjhen. All rights reserved.</p>
-                    <a href="https://www.leiadakrozjhen.com" target="_blank">www.leiadakrozjhen.com</a>
-                </div>
-            </footer>
-        </div>
-    </div>
-
-    <!-- ════════════════════════════════════════
-         MOBILE OVERLAY
-    ════════════════════════════════════════ -->
-    <div id="lk-mobile-overlay">
-        <ul>
-            <li><a href="https://www.leiadakrozjhen.com/" class="active">Work</a></li>
-            <li><a href="https://www.leiadakrozjhen.com/book-me">Book Me</a></li>
-            <li><a href="https://www.leiadakrozjhen.com/prints">Prints</a></li>
-            <li><a href="https://www.leiadakrozjhen.com/blog">Blog</a></li>
-            <li><a href="https://www.leiadakrozjhen.com/contact">Contact</a></li>
+    <div class="footer-grid">
+      <div class="footer-col reveal">
+        <h4>Navigate</h4>
+        <ul class="footer-nav">
+          <li><a href="index.html">Work</a></li>
+          <li><a href="book.html">Book Me</a></li>
+          <li><a href="prints.html">Prints</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
-        <div class="mobile-social">
-            <a href="https://instagram.com/leiadakrozjhen" aria-label="Instagram">
-                <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
-                Instagram
-            </a>
+      </div>
+      <div class="footer-col reveal">
+        <h4>Get In Touch</h4>
+        <ul class="contact-list">
+          <li>
+            <span class="icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+            <a href="mailto:hello@leiadakrozjhen.com">hello@leiadakrozjhen.com</a>
+          </li>
+          <li>
+            <span class="icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.04 1.23 2 2 0 012 .04h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></span>
+            <span>1-704-412-8273 (text only)</span>
+          </li>
+        </ul>
+      </div>
+      <div class="footer-col reveal">
+        <h4>Service Area</h4>
+        <span class="area-label">Within 30 miles of Charlotte, NC</span>
+        <div class="regions">
+          <span class="region-tag">Charlotte, NC</span>
+          <span class="region-tag">Huntersville, NC</span>
+          <span class="region-tag">Harrisburg, NC</span>
+          <span class="region-tag">Monroe, NC</span>
+          <span class="region-tag">Rock Hill, SC</span>
+          <span class="region-tag">Mt. Holly, NC</span>
         </div>
+      </div>
     </div>
+    <div class="footer-bottom">
+      <p>&copy; <span class="year"></span> Leiada Krözjhen. All rights reserved.</p>
+      <a href="https://www.leiadakrozjhen.com" target="_blank">www.leiadakrozjhen.com</a>
+    </div>
+  </div>
+</footer>
 
-    <script src="main.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>
