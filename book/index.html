@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Me — Leiada Krözjhen</title>
+<link href="https://fonts.cdnfonts.com/css/shadow-whisper" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body><nav id="mainNav">
+  <div class="nav-inner">
+    <a href="../" class="nav-logo">Leiada Krözjhen</a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="../">Work</a></li>
+        <li><a href="../book/"  class="active">Book Me</a></li>
+        <li><a href="../prints/">Prints</a></li>
+        <li><a href="../blog/">Blog</a></li>
+        <li><a href="../contact/">Contact</a></li>
+      </ul>
+      <a href="https://instagram.com/leiadakrozjhen" target="_blank" class="nav-ig" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <button class="theme-toggle" aria-label="Toggle dark/light mode">
+        <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <button class="nav-burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="../">Work</a></li>
+    <li><a href="../book/"  class="active">Book Me</a></li>
+    <li><a href="../prints/">Prints</a></li>
+    <li><a href="../blog/">Blog</a></li>
+    <li><a href="../contact/">Contact</a></li>
+  </ul>
+  <div class="ig-row">
+    <a href="https://instagram.com/leiadakrozjhen" target="_blank">
+      <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      leiadakrozjhen
+    </a>
+  </div>
+  <div class="mobile-theme-row">
+    <span class="mobile-theme-label">Appearance</span>
+    <button class="mobile-theme-toggle" aria-label="Toggle dark/light mode">
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
+</div>
+<div class="wrap">
+  <div class="page-hero">
+    <p class="eyebrow">Let's work together</p>
+    <h1>Book a Session</h1>
+    <p>Select the category that best describes you, then choose a package that fits your needs. Every session is crafted to showcase your vehicle at its best.</p>
+  </div>
+
+  <div class="client-selector">
+    <button class="client-btn active" onclick="selectClient('owner',this)">Private Owner</button>
+    <button class="client-btn" onclick="selectClient('dealer',this)">Dealership</button>
+    <button class="client-btn" onclick="selectClient('shop',this)">Detail / Body Shop</button>
+  </div>
+
+  <!-- PRIVATE OWNER -->
+  <div class="packages-wrap active" id="pkg-owner">
+    <div class="packages-grid">
+      <div class="pkg-card">
+        <p class="pkg-tier">Tier I</p>
+        <h3 class="pkg-name">Showcase</h3>
+        <p class="pkg-price">$400 <span>flat</span></p>
+        <p class="pkg-tagline">Perfect for selling your car or building your social media presence with gallery-quality imagery.</p>
+        <ul class="pkg-features">
+          <li>45-minute session at 1 location</li>
+          <li>10 fully edited, high-resolution images</li>
+          <li>Exterior angles &amp; detail shots</li>
+          <li>Online gallery delivery within 5 business days</li>
+          <li>Personal-use license included</li>
+        </ul>
+        <button class="pkg-btn" onclick="openBookingForm('owner','Showcase — $400')">Select Package</button>
+      </div>
+      <div class="pkg-card featured">
+        <div class="pkg-badge">Most Popular</div>
+        <p class="pkg-tier">Tier II</p>
+        <h3 class="pkg-name">Signature</h3>
+        <p class="pkg-price">$700 <span>flat</span></p>
+        <p class="pkg-tagline">Elevated imagery for enthusiasts who want their build to stop the scroll.</p>
+        <ul class="pkg-features">
+          <li>2-hour session, up to 2 locations</li>
+          <li>25 fully edited high-res images</li>
+          <li>Exterior, interior &amp; lifestyle/driver shots</li>
+          <li>Golden hour timing (sunrise or sunset)</li>
+          <li>Delivery within 4 business days</li>
+          <li>Commercial social media license</li>
+        </ul>
+        <button class="pkg-btn" onclick="openBookingForm('owner','Signature — $700')">Select Package</button>
+      </div>
+      <div class="pkg-card">
+        <p class="pkg-tier">Tier III</p>
+        <h3 class="pkg-name">Editorial</h3>
+        <p class="pkg-price">$1,200 <span>flat</span></p>
+        <p class="pkg-tagline">Full creative production for builds that deserve magazine-level treatment.</p>
+        <ul class="pkg-features">
+          <li>Half-day session (up to 4 hours), up to 4 locations</li>
+          <li>40+ fully edited high-res images</li>
+          <li>Creative direction &amp; scouted locations</li>
+          <li>Exterior, interior, engine bay &amp; motion shots</li>
+          <li>Delivery within 3 business days</li>
+          <li>Full commercial + print license</li>
+        </ul>
+        <button class="pkg-btn" onclick="openBookingForm('owner','Editorial — $1,200')">Select Package</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEALERSHIP -->
+  <div class="packages-wrap" id="pkg-dealer">
+    <div class="retainer-note">
+      <p>Dealership pricing is structured as a <strong>monthly retainer</strong> — not per session. Your plan is based on the number of vehicles and images per vehicle you need each month.</p>
+    </div>
+    <div class="packages-grid">
+      <div class="pkg-card">
+        <p class="pkg-tier">Retainer · Tier I</p>
+        <h3 class="pkg-name">Lot Presence</h3>
+        <p class="pkg-price">$900 <span>/ month</span></p>
+        <p class="pkg-tagline">Consistent, polished inventory imagery for smaller lots that need to stand out online.</p>
+        <ul class="pkg-features">
+          <li>Up to 10 vehicles per month</li>
+          <li>12 edited images per vehicle</li>
+          <li>Clean, consistent inventory style</li>
+          <li>Delivery within 3 business days per batch</li>
+          <li>Full dealership commercial license</li>
+          <li>Priority scheduling within your service area</li>
+        </ul>
+        <button class="pkg-btn" onclick="openBookingForm('dealer','Lot Presence Retainer — $900/mo')">Select Plan</button>
+      </div>
+      <div class="pkg-card featured">
+        <div class="pkg-badge">Best Value</div>
+        <p class="pkg-tier">Retainer · Tier II</p>
+        <h3 class="pkg-name">Flagship</h3>
+        <p class="pkg-price">$1,800 <span>/ month</span></p>
+        <p class="pkg-tagline">Elevated monthly content for mid-size dealerships with marquee vehicles to highlight.</p>
+        <ul class="pkg-features">
+          <li>Up to 20 vehicles per month</li>
+          <li>20 edited images per vehicle</li>
+          <li>Includes up to 4 hero/feature-vehicle shoots</li>
+          <li>Social-ready vertical crops included</li>
+          <li>Delivery within 2 business days per batch</li>
+          <li>Full commercial license + usage rights</li>
+          <li>Monthly content strategy call</li>
+        </ul>
+        <button class="pkg-btn" onclick="openBookingForm('dealer','Flagship Retainer — $1,800/mo')">Select Plan</button>
+      </div>
+      <div class="pkg-card">
+        <p class="pkg-tier">Retainer · Tier III</p>
+        <h3 class="pkg-name">Brand Authority</h3>
+        <p class="pkg-price">$3,200 <span>/ month</span></p>
+        <p class="pkg-tagline">Full-scale visual brand management for high-volume or luxury dealerships.</p>
+        <ul class="pkg-features">
+          <li>Up to 40 vehicles per month</li>
+          <li>25+ images per vehicle</li>
+          <li>Unlimited hero shoots included</li>
+          <li>Same-week turnaround</li>
+          <li>Unlimited commercial + print use</li>
+          <li>Dedicated content planning &amp; scheduling</li>
+        </ul>
+        <button class="pkg-btn" onclick="openBookingForm('dealer','Brand Authority Retainer — $3,200/mo')">Select Plan</button>
+      </div>
+    </div>
+    <div class="retainer-note" style="margin-top:0;margin-bottom:2.5rem">
+      <p>Need a custom volume? <strong>Reach out directly</strong> and we'll build a plan around your exact inventory and content goals.</p>
+    </div>
+  </div>
+
+  <!-- DETAIL / BODY SHOP -->
+  <div class="packages-wrap" id="pkg-shop">
+    <div class="packages-grid">
+      <div class="pkg-card">
+        <p class="pkg-tier">Tier I</p>
+        <h3 class="pkg-name">Before &amp; After</h3>
+        <p class="pkg-price">$300 <span>flat</span></p>
+        <p class="pkg-tagline">Document your craft and show clients the transformation your work delivers.</p>
+        <ul class="pkg-features">
+          <li>1 vehicle, full before &amp; after coverage</li>
+          <li>20 edited images</li>
+          <li>Detail closeups for highlight reels</li>
+          <li>Commercial license included</li>
+        </ul>
+        <button class="pkg-btn" onclick="openBookingForm('shop','Before &amp; After — $300')">Select Package</button>
+      </div>
+      <div class="pkg-card featured">
+        <div class="pkg-badge">Top Choice</div>
+        <p class="pkg-tier">Tier II</p>
+        <h3 class="pkg-name">Portfolio Build</h3>
+        <p class="pkg-price">$550 <span>flat</span></p>
+        <p class="pkg-tagline">Build the visual portfolio your shop deserves — work that sells itself.</p>
+        <ul class="pkg-features">
+          <li>Up to 3 vehicles</li>
+          <li>20 edited images per vehicle</li>
+          <li>Detail &amp; craft-focused compositions</li>
+          <li>Full commercial license</li>
+          <li>Delivery within 4 business days</li>
+        </ul>
+        <button class="pkg-btn" onclick="openBookingForm('shop','Portfolio Build — $550')">Select Package</button>
+      </div>
+      <div class="pkg-card">
+        <p class="pkg-tier">Tier III</p>
+        <h3 class="pkg-name">Brand Identity</h3>
+        <p class="pkg-price">$1,000 <span>flat</span></p>
+        <p class="pkg-tagline">Complete visual identity session — content your brand can build a reputation on.</p>
+        <ul class="pkg-features">
+          <li>Up to 5 vehicles</li>
+          <li>25+ images per vehicle</li>
+          <li>Shop lifestyle &amp; team shots</li>
+          <li>Video reels (up to 4 clips)</li>
+          <li>Unlimited commercial use</li>
+          <li>Delivery within 3 business days</li>
+        </ul>
+        <button class="pkg-btn" onclick="openBookingForm('shop','Brand Identity — $1,000')">Select Package</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENHANCED BOOKING FORM -->
+  <div class="booking-form-section" id="bookingForm">
+    <div class="booking-form-inner" id="bookingFormInner">
+      <h2 class="form-heading">Reserve Your Session</h2>
+      <p class="form-sub">You've selected:</p>
+      <span class="form-pkg-label" id="formPackageLabel">Package</span>
+
+      <!-- SECTION 1: YOUR DETAILS -->
+      <p class="form-section-label">Your Details</p>
+      <div class="form-row two">
+        <div class="form-group">
+          <label for="bf-fname">First Name *</label>
+          <input type="text" id="bf-fname" placeholder="Paydreanne" autocomplete="given-name">
+          <span class="field-error" id="berr-fname"></span>
+        </div>
+        <div class="form-group">
+          <label for="bf-lname">Last Name *</label>
+          <input type="text" id="bf-lname" placeholder="Doe or D.">
+          <span class="field-hint">You may use an initial + dot (e.g. "D.") for privacy.</span>
+          <span class="field-error" id="berr-lname"></span>
+        </div>
+      </div>
+      <div class="form-row two">
+        <div class="form-group">
+          <label for="bf-email">Email *</label>
+          <input type="email" id="bf-email" placeholder="you@email.com" autocomplete="email">
+          <span class="field-error" id="berr-email"></span>
+        </div>
+        <div class="form-group">
+          <label for="bf-phone">Phone (optional)</label>
+          <input type="tel" id="bf-phone" placeholder="704-xxx-xxxx" autocomplete="tel">
+        </div>
+      </div>
+
+      <!-- SECTION 2: YOUR VEHICLE -->
+      <p class="form-section-label">Your Vehicle</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="bf-vehicle">Vehicle — Year, Make, Model *</label>
+          <input type="text" id="bf-vehicle" placeholder="e.g. 2023 Toyota GR Supra">
+          <span class="field-error" id="berr-vehicle"></span>
+        </div>
+      </div>
+      <div class="form-row two">
+        <div class="form-group">
+          <label for="bf-color">Vehicle Color / Finish</label>
+          <input type="text" id="bf-color" placeholder="e.g. Phantom Grey Metallic">
+        </div>
+        <div class="form-group">
+          <label for="bf-mods">Notable Mods / Build Details</label>
+          <input type="text" id="bf-mods" placeholder="e.g. widebody, coilovers, carbon roof">
+        </div>
+      </div>
+
+      <p class="form-section-label">Preferred Date &amp; Time</p>
+      <div class="avail-schedule">
+        <p class="avail-title">My availability</p>
+        <ul class="avail-list">
+          <li><span class="avail-day">Mon</span><span class="avail-hours">5:00 AM – 7:00 PM</span></li>
+          <li><span class="avail-day">Tue – Thu</span><span class="avail-hours">5:00 PM – 7:00 PM</span></li>
+          <li><span class="avail-day">Fri</span><span class="avail-hours">5:00 AM – 7:00 AM</span></li>
+          <li><span class="avail-day">Sat</span><span class="avail-hours">5:00–9:00 AM &amp; 5:00–7:00 PM</span></li>
+          <li class="avail-unavail"><span class="avail-day">Sun</span><span class="avail-hours">Unavailable</span></li>
+        </ul>
+      </div>
+      <div class="form-row two">
+        <div class="form-group">
+          <label for="bf-date">Preferred Date *</label>
+          <input type="date" id="bf-date">
+          <span class="field-hint" id="date-avail-hint" style="margin-top:0.3rem;font-size:0.72rem;"></span>
+          <span class="field-error" id="berr-date"></span>
+        </div>
+        <div class="form-group">
+          <label for="bf-time">Preferred Time *</label>
+          <select id="bf-time">
+            <option value="">Select a time window</option>
+            <optgroup label="Early Morning (Mon, Fri, Sat)">
+              <option value="early-am|05:00-07:00">5:00 AM – 7:00 AM</option>
+            </optgroup>
+            <optgroup label="Morning (Mon, Sat only)">
+              <option value="morning|07:00-09:00">7:00 AM – 9:00 AM</option>
+              <option value="morning-late|09:00-12:00">9:00 AM – 12:00 PM</option>
+              <option value="midday|12:00-17:00">Midday – 5:00 PM</option>
+            </optgroup>
+            <optgroup label="Evening (Mon–Sat)">
+              <option value="evening|17:00-19:00">5:00 PM – 7:00 PM</option>
+            </optgroup>
+          </select>
+          <span class="field-hint" id="time-avail-hint" style="margin-top:0.3rem;font-size:0.72rem;letter-spacing:0.04em;"></span>
+          <span class="field-error" id="berr-time"></span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="bf-alt-date">Alternative Date (optional)</label>
+          <input type="date" id="bf-alt-date">
+        </div>
+      </div>
+
+      <!-- SECTION 4: LOCATION -->
+      <p class="form-section-label">Location</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Do you have a shoot location in mind?</label>
+          <div class="pill-group">
+            <label class="pill-label"><input type="radio" name="bf-has-location-sel" value="Yes — I have a specific spot"><span>Yes — specific spot</span></label>
+            <label class="pill-label"><input type="radio" name="bf-has-location-sel" value="Somewhat — I have a general area"><span>Somewhat — general area</span></label>
+            <label class="pill-label"><input type="radio" name="bf-has-location-sel" value="No — open to your suggestions"><span>No — open to suggestions</span></label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="bf-location">Location / City or Specific Spot</label>
+          <input type="text" id="bf-location" placeholder="e.g. Charlotte, NC — Uptown, or Carowinds parking lot">
+        </div>
+      </div>
+
+      <!-- SECTION 5: CREATIVE VISION -->
+      <p class="form-section-label">Your Vision</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="bf-vision">Describe your vision for the shoot</label>
+          <textarea id="bf-vision" style="min-height:100px" placeholder="e.g. Clean, moody urban environment, lots of detail shots, maybe a highway ramp shot at blue hour…"></textarea>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Preferred shooting style</label>
+          <div class="pill-group">
+            <label class="pill-label"><input type="checkbox" name="bf-style" value="Clean &amp; Minimal"><span>Clean &amp; Minimal</span></label>
+            <label class="pill-label"><input type="checkbox" name="bf-style" value="Moody / Dark"><span>Moody / Dark</span></label>
+            <label class="pill-label"><input type="checkbox" name="bf-style" value="Golden Hour / Cinematic"><span>Golden Hour / Cinematic</span></label>
+            <label class="pill-label"><input type="checkbox" name="bf-style" value="Urban / Street"><span>Urban / Street</span></label>
+            <label class="pill-label"><input type="checkbox" name="bf-style" value="Nature / Landscape"><span>Nature / Landscape</span></label>
+            <label class="pill-label"><input type="checkbox" name="bf-style" value="Rolling / Motion shots"><span>Rolling / Motion</span></label>
+            <label class="pill-label"><input type="checkbox" name="bf-style" value="Open to direction"><span>Open to direction</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 6: GOALS -->
+      <p class="form-section-label">Your Goals</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="bf-goals">What are your goals for this shoot?</label>
+          <textarea id="bf-goals" style="min-height:90px" placeholder="e.g. Selling the car, growing my Instagram, creating memories, entering a car show, brand content for my page…"></textarea>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>What do you want to do with these photos?</label>
+          <div class="pill-group">
+            <label class="pill-label"><input type="checkbox" name="bf-deliverables" value="Social media content"><span>Social media</span></label>
+            <label class="pill-label"><input type="checkbox" name="bf-deliverables" value="Sell the vehicle"><span>Sell the vehicle</span></label>
+            <label class="pill-label"><input type="checkbox" name="bf-deliverables" value="Personal wall prints"><span>Wall prints</span></label>
+            <label class="pill-label"><input type="checkbox" name="bf-deliverables" value="Car show / event submission"><span>Car show / event</span></label>
+            <label class="pill-label"><input type="checkbox" name="bf-deliverables" value="Magazine / media feature"><span>Magazine / media</span></label>
+            <label class="pill-label"><input type="checkbox" name="bf-deliverables" value="Brand / sponsor content"><span>Brand / sponsor</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 7: EXPERIENCE & BUDGET -->
+      <p class="form-section-label">A Few More Things</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="bf-experience">Have you done an automotive shoot before?</label>
+          <select id="bf-experience">
+            <option value="">Select one</option>
+            <option value="No — this is my first time">No — this is my first time</option>
+            <option value="Yes — once or twice">Yes — once or twice</option>
+            <option value="Yes — several times">Yes — several times</option>
+            <option value="Yes — regularly">Yes — regularly</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="bf-budget-flex">Is your budget flexible if the shoot scope expands?</label>
+          <select id="bf-budget-flex">
+            <option value="">Select one</option>
+            <option value="Yes — somewhat flexible">Yes — somewhat flexible</option>
+            <option value="No — package price is my firm limit">No — package price is my firm limit</option>
+            <option value="Depends on what's offered">Depends on what's offered</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="bf-inspo">Inspiration links or references (optional)</label>
+          <input type="text" id="bf-inspo" placeholder="Instagram posts, Pinterest boards, photographers you love…">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="bf-notes">Anything else I should know?</label>
+          <textarea id="bf-notes" placeholder="Accessibility needs, pet in shots, specific concerns, or anything else on your mind…"></textarea>
+        </div>
+      </div>
+
+      <button class="form-submit" id="bookingSubmitBtn" type="button">Send Booking Request</button>
+      <p class="form-note">I'll respond within 24–48 hours to confirm details and next steps.</p>
+    </div>
+
+    <!-- SUCCESS STATE -->
+    <div class="booking-success" id="bookingSuccess">
+      <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <h3>Request received.</h3>
+      <p>Thank you for your detailed submission — it really helps me plan the perfect shoot. I'll be in touch within 24–48 hours.</p>
+    </div>
+  </div>
+</div>
+<footer>
+  <div class="footer-wrap">
+    <div class="footer-brand reveal">
+      <a href="../" class="footer-logo-text">Leiada Krözjhen</a>
+      <span class="footer-tagline">Automotive Photography · Charlotte, NC</span>
+      <a href="https://instagram.com/leiadakrozjhen" target="_blank" class="footer-ig">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+        leiadakrozjhen
+      </a>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-col reveal">
+        <h4>Navigate</h4>
+        <ul class="footer-nav">
+          <li><a href="../">Work</a></li>
+          <li><a href="../book/">Book Me</a></li>
+          <li><a href="../prints/">Prints</a></li>
+          <li><a href="../blog/">Blog</a></li>
+          <li><a href="../contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col reveal">
+        <h4>Get In Touch</h4>
+        <ul class="contact-list">
+          <li>
+            <span class="icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+            <a href="mailto:hello@leiadakrozjhen.com">hello@leiadakrozjhen.com</a>
+          </li>
+          <li>
+            <span class="icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.04 1.23 2 2 0 012 .04h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></span>
+            <span>1-704-412-8273 (text only)</span>
+          </li>
+        </ul>
+      </div>
+      <div class="footer-col reveal">
+        <h4>Service Area</h4>
+        <span class="area-label">Within 30 miles of Charlotte, NC</span>
+        <div class="regions">
+          <span class="region-tag">Charlotte, NC</span>
+          <span class="region-tag">Huntersville, NC</span>
+          <span class="region-tag">Harrisburg, NC</span>
+          <span class="region-tag">Monroe, NC</span>
+          <span class="region-tag">Rock Hill, SC</span>
+          <span class="region-tag">Mt. Holly, NC</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span class="year"></span> Leiada Krözjhen. All rights reserved.</p>
+      <a href="https://www.leiadakrozjhen.com" target="_blank">www.leiadakrozjhen.com</a>
+    </div>
+  </div>
+</footer>
+<script src="../js/script.js"></script>
+</body>
+</html>
