@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unsubscribe — Leiada Krözjhen</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:'Jost',sans-serif;
+    font-weight:300;
+    background:#f5f3f0;
+    color:#111110;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px 20px;
+  }
+
+  .card{
+    background:#fff;
+    border-radius:4px;
+    max-width:520px;
+    width:100%;
+    overflow:hidden;
+    box-shadow:0 4px 24px rgba(0,0,0,0.07);
+  }
+
+  .card-accent{height:3px;background:#c0272d;}
+
+  .card-body{padding:48px 48px 40px;}
+
+  .eyebrow{
+    font-size:0.68rem;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    color:#c0272d;
+    margin-bottom:10px;
+    display:block;
+  }
+
+  h1{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:300;
+    font-size:2.4rem;
+    line-height:1.1;
+    color:#111110;
+    margin-bottom:12px;
+  }
+
+  .sub{
+    font-size:0.92rem;
+    color:#6b6560;
+    line-height:1.72;
+    margin-bottom:32px;
+  }
+
+  /* Reason pills */
+  .reason-label{
+    font-size:0.68rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:#6b6560;
+    margin-bottom:12px;
+    display:block;
+  }
+
+  .reasons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:28px;
+  }
+
+  .reason-btn{
+    background:none;
+    border:1px solid rgba(0,0,0,0.12);
+    border-radius:20px;
+    padding:8px 16px;
+    font-family:'Jost',sans-serif;
+    font-size:0.82rem;
+    color:#6b6560;
+    cursor:pointer;
+    transition:all 0.2s;
+    line-height:1;
+  }
+  .reason-btn:hover{border-color:rgba(192,39,45,0.35);color:#111110;}
+  .reason-btn.selected{background:#c0272d;color:#fff;border-color:#c0272d;}
+
+  .skip-note{
+    font-size:0.72rem;
+    color:#a09888;
+    margin-bottom:28px;
+    letter-spacing:0.04em;
+  }
+
+  .confirm-btn{
+    width:100%;
+    padding:14px;
+    background:#c0272d;
+    border:none;
+    border-radius:2px;
+    font-family:'Jost',sans-serif;
+    font-size:0.78rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:#fff;
+    cursor:pointer;
+    transition:background 0.25s;
+    margin-bottom:14px;
+  }
+  .confirm-btn:hover{background:#9e1f24;}
+
+  .back-link{
+    display:block;
+    text-align:center;
+    font-size:0.75rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:#a09888;
+    text-decoration:none;
+    transition:color 0.2s;
+  }
+  .back-link:hover{color:#c0272d;}
+
+  /* Success state */
+  .success-state{display:none;text-align:center;padding:48px 48px 40px;}
+  .success-icon{
+    width:56px;height:56px;
+    border-radius:50%;
+    background:rgba(192,39,45,0.07);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 20px;
+  }
+  .success-icon svg{width:24px;height:24px;stroke:#c0272d;fill:none;stroke-width:1.6;}
+  .success-state h2{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:300;
+    font-size:2rem;
+    margin-bottom:10px;
+    color:#111110;
+  }
+  .success-state p{font-size:0.9rem;color:#6b6560;line-height:1.7;margin-bottom:24px;}
+
+  .card-footer{
+    border-top:1px solid rgba(0,0,0,0.06);
+    padding:16px 48px;
+    text-align:center;
+  }
+  .card-footer p{font-size:0.72rem;color:#a09888;letter-spacing:0.04em;}
+  .card-footer a{color:#c0272d;text-decoration:none;}
+  .card-footer a:hover{text-decoration:underline;}
+
+  @media(max-width:560px){
+    .card-body,.success-state{padding:32px 24px 28px;}
+    .card-footer{padding:14px 24px;}
+    h1{font-size:2rem;}
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="card-accent"></div>
+
+  <!-- FORM STATE -->
+  <div id="formState">
+    <div class="card-body">
+      <span class="eyebrow">Newsletter</span>
+      <h1>Unsubscribe</h1>
+      <p class="sub">
+        You'll be removed from Leiada Krözjhen's newsletter immediately. No hard feelings — I'm glad you were here for any amount of time.
+      </p>
+
+      <!-- Optional reason -->
+      <span class="reason-label">Mind sharing why? <em style="font-style:normal;opacity:0.6;">(optional)</em></span>
+      <div class="reasons" id="reasonGroup">
+        <button class="reason-btn" type="button" data-reason="Not interested anymore">Not interested anymore</button>
+        <button class="reason-btn" type="button" data-reason="Content isn't for me">Content isn't for me</button>
+        <button class="reason-btn" type="button" data-reason="Too many emails">Too many emails</button>
+        <button class="reason-btn" type="button" data-reason="I prefer Instagram">I prefer Instagram</button>
+        <button class="reason-btn" type="button" data-reason="Just cleaning up my inbox">Just cleaning up my inbox</button>
+        <button class="reason-btn" type="button" data-reason="Other">Other</button>
+      </div>
+      <p class="skip-note">Selecting a reason is completely optional — hitting the button below is all you need to do.</p>
+
+      <button class="confirm-btn" id="confirmBtn" type="button">Confirm Unsubscribe</button>
+      <a href="../" class="back-link">← Back to site</a>
+    </div>
+  </div>
+
+  <!-- SUCCESS STATE -->
+  <div class="success-state" id="successState">
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h2>You're unsubscribed.</h2>
+    <p>You won't hear from me again unless you choose to re-subscribe. Thanks for being part of this, even briefly.</p>
+    <a href="../" class="back-link" style="display:inline-block;margin-top:4px;">← Back to site</a>
+  </div>
+
+  <div class="card-footer">
+    <p>Changed your mind? <a href="../blog/#newsletter">Subscribe again</a>.</p>
+  </div>
+</div>
+
+<script>
+  // Reason pill toggle (single-select)
+  const reasonBtns = document.querySelectorAll('.reason-btn');
+  let selectedReason = '';
+  reasonBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      reasonBtns.forEach(b => b.classList.remove('selected'));
+      if (selectedReason === btn.dataset.reason) {
+        // Clicking same pill deselects it
+        selectedReason = '';
+      } else {
+        btn.classList.add('selected');
+        selectedReason = btn.dataset.reason;
+      }
+    });
+  });
+
+  // Confirm unsubscribe
+  // NOTE: In production with Mailchimp, the *|UNSUB|* link in emails takes the
+  // subscriber to Mailchimp's own hosted unsubscribe page which handles the actual
+  // list removal. This page is for the optional reason survey — you can link to it
+  // from your unsubscribe confirmation page in Mailchimp's settings, or use it
+  // standalone and collect feedback via Web3Forms below.
+  document.getElementById('confirmBtn').addEventListener('click', async function() {
+    const btn = this;
+    btn.textContent = 'Processing…';
+    btn.disabled = true;
+
+    // If a reason was selected, send it to Web3Forms for your records
+    if (selectedReason) {
+      try {
+        const fd = new FormData();
+        fd.append('access_key', '20af0837-25da-465b-9f3a-79d0fdac8145');
+        fd.append('name',    'Newsletter Unsubscribe');
+        fd.append('email',   'unsubscribe-feedback@leiadakrozjhen.com');
+        fd.append('subject', 'Newsletter Unsubscribe Reason');
+        fd.append('message', `Unsubscribe reason: ${selectedReason}`);
+        await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: fd,
+          headers: { 'Accept': 'application/json' }
+        });
+      } catch(e) {
+        // Silently fail — feedback is non-essential
+      }
+    }
+
+    // Show success either way
+    document.getElementById('formState').style.display   = 'none';
+    document.getElementById('successState').style.display = 'block';
+  });
+</script>
+
+</body>
+</html>
