@@ -442,7 +442,7 @@ nav.scrolled { box-shadow: 0 2px 24px var(--shadow); }
    BRANDS STRIP
    ============================================================ */
 .brands-strip {
-  background: var(--sand);
+  background: #6a1d20;
   margin: 6rem 0 0;
   padding: 2.2rem 5%;
   width: 100%;
