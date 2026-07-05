@@ -63,7 +63,7 @@
   <div class="client-selector">
     <button class="client-btn active" onclick="selectClient('owner',this)">Private Owner</button>
     <button class="client-btn" onclick="selectClient('dealer',this)">Dealership</button>
-    <button class="client-btn" onclick="selectClient('shop',this)">Detail / Body Shop</button>
+    <button class="client-btn" onclick="selectClient('multi',this)">Multi-Car / Bike Session</button>
   </div>
 
   <!-- PRIVATE OWNER -->
@@ -176,51 +176,57 @@
     </div>
   </div>
 
-  <!-- DETAIL / BODY SHOP -->
-  <div class="packages-wrap" id="pkg-shop">
+  <!-- MULTI-CAR / BIKE SESSION -->
+  <div class="packages-wrap" id="pkg-multi">
+    <div class="retainer-note">
+      <p>Group sessions capture up to <strong>3 vehicles or bikes together</strong> — perfect for car clubs, riding crews, friends, or family. Pricing scales with session length, number of locations, and total photos delivered.</p>
+    </div>
     <div class="packages-grid">
       <div class="pkg-card">
         <p class="pkg-tier">Tier I</p>
-        <h3 class="pkg-name">Before &amp; After</h3>
-        <p class="pkg-price">$300 <span>flat</span></p>
-        <p class="pkg-tagline">Document your craft and show clients the transformation your work delivers.</p>
+        <h3 class="pkg-name">Duo Showcase</h3>
+        <p class="pkg-price">$450 <span>flat</span></p>
+        <p class="pkg-tagline">A tight, efficient session built for two vehicles or bikes shot together.</p>
         <ul class="pkg-features">
-          <li>1 vehicle, full before &amp; after coverage</li>
-          <li>20 edited images</li>
-          <li>Detail closeups for highlight reels</li>
-          <li>Commercial license included</li>
+          <li>Up to 2 vehicles/bikes</li>
+          <li>45-minute session at 1 location</li>
+          <li>15 fully edited images (mix of individual &amp; group shots)</li>
+          <li>Exterior &amp; detail coverage for each vehicle</li>
+          <li>Online gallery delivery within 4 business days</li>
+          <li>Personal-use license included</li>
         </ul>
-        <button class="pkg-btn" onclick="openBookingForm('shop','Before &amp; After — $300')">Select Package</button>
+        <button class="pkg-btn" onclick="openBookingForm('multi','Duo Showcase — $450')">Select Package</button>
       </div>
       <div class="pkg-card featured">
-        <div class="pkg-badge">Top Choice</div>
+        <div class="pkg-badge">Most Popular</div>
         <p class="pkg-tier">Tier II</p>
-        <h3 class="pkg-name">Portfolio Build</h3>
-        <p class="pkg-price">$550 <span>flat</span></p>
-        <p class="pkg-tagline">Build the visual portfolio your shop deserves — work that sells itself.</p>
+        <h3 class="pkg-name">Trio Signature</h3>
+        <p class="pkg-price">$700 <span>flat</span></p>
+        <p class="pkg-tagline">The full group experience — built for car clubs, crews, and riding buddies.</p>
         <ul class="pkg-features">
-          <li>Up to 3 vehicles</li>
-          <li>20 edited images per vehicle</li>
-          <li>Detail &amp; craft-focused compositions</li>
-          <li>Full commercial license</li>
-          <li>Delivery within 4 business days</li>
+          <li>Up to 3 vehicles/bikes</li>
+          <li>1.5-hour session, up to 2 locations</li>
+          <li>25 fully edited images (individual, paired &amp; full-group shots)</li>
+          <li>Golden hour timing (sunrise or sunset)</li>
+          <li>Delivery within 3 business days</li>
+          <li>Commercial social media license</li>
         </ul>
-        <button class="pkg-btn" onclick="openBookingForm('shop','Portfolio Build — $550')">Select Package</button>
+        <button class="pkg-btn" onclick="openBookingForm('multi','Trio Signature — $700')">Select Package</button>
       </div>
       <div class="pkg-card">
         <p class="pkg-tier">Tier III</p>
-        <h3 class="pkg-name">Brand Identity</h3>
-        <p class="pkg-price">$1,000 <span>flat</span></p>
-        <p class="pkg-tagline">Complete visual identity session — content your brand can build a reputation on.</p>
+        <h3 class="pkg-name">Trio Editorial</h3>
+        <p class="pkg-price">$1,100 <span>flat</span></p>
+        <p class="pkg-tagline">Full creative production for a crew whose builds deserve magazine-level treatment.</p>
         <ul class="pkg-features">
-          <li>Up to 5 vehicles</li>
-          <li>25+ images per vehicle</li>
-          <li>Shop lifestyle &amp; team shots</li>
-          <li>Video reels (up to 4 clips)</li>
-          <li>Unlimited commercial use</li>
-          <li>Delivery within 3 business days</li>
+          <li>Up to 3 vehicles/bikes</li>
+          <li>2.5-hour session, up to 3 locations</li>
+          <li>40 fully edited images (solo, paired, rolling &amp; full-group compositions)</li>
+          <li>Creative direction &amp; scouted locations</li>
+          <li>Expedited delivery within 2 business days</li>
+          <li>Full commercial + print license</li>
         </ul>
-        <button class="pkg-btn" onclick="openBookingForm('shop','Brand Identity — $1,000')">Select Package</button>
+        <button class="pkg-btn" onclick="openBookingForm('multi','Trio Editorial — $1,100')">Select Package</button>
       </div>
     </div>
   </div>
@@ -237,7 +243,7 @@
       <div class="form-row two">
         <div class="form-group">
           <label for="bf-fname">First Name *</label>
-          <input type="text" id="bf-fname" placeholder="Paydreanne" autocomplete="given-name">
+          <input type="text" id="bf-fname" placeholder="Jordan" autocomplete="given-name">
           <span class="field-error" id="berr-fname"></span>
         </div>
         <div class="form-group">
@@ -259,23 +265,126 @@
         </div>
       </div>
 
-      <!-- SECTION 2: YOUR VEHICLE -->
-      <p class="form-section-label">Your Vehicle</p>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="bf-vehicle">Vehicle — Year, Make, Model *</label>
-          <input type="text" id="bf-vehicle" placeholder="e.g. 2023 Toyota GR Supra">
-          <span class="field-error" id="berr-vehicle"></span>
+      <!-- SECTION 2: YOUR VEHICLE (client-specific) -->
+
+      <!-- PRIVATE OWNER: single vehicle -->
+      <div data-for-client="owner">
+        <p class="form-section-label">Your Vehicle</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="bf-vehicle">Vehicle — Year, Make, Model *</label>
+            <input type="text" id="bf-vehicle" placeholder="e.g. 2023 Toyota GR Supra">
+            <span class="field-error" id="berr-vehicle"></span>
+          </div>
+        </div>
+        <div class="form-row two">
+          <div class="form-group">
+            <label for="bf-color">Vehicle Color / Finish</label>
+            <input type="text" id="bf-color" placeholder="e.g. Phantom Grey Metallic">
+          </div>
+          <div class="form-group">
+            <label for="bf-mods">Notable Mods / Build Details</label>
+            <input type="text" id="bf-mods" placeholder="e.g. widebody, coilovers, carbon roof">
+          </div>
         </div>
       </div>
-      <div class="form-row two">
-        <div class="form-group">
-          <label for="bf-color">Vehicle Color / Finish</label>
-          <input type="text" id="bf-color" placeholder="e.g. Phantom Grey Metallic">
+
+      <!-- DEALERSHIP: business + inventory details -->
+      <div data-for-client="dealer">
+        <p class="form-section-label">Dealership Details</p>
+        <div class="form-row two">
+          <div class="form-group">
+            <label for="bf-dealer-name">Dealership Name *</label>
+            <input type="text" id="bf-dealer-name" placeholder="e.g. Uptown Motors">
+            <span class="field-error" id="berr-dealer-name"></span>
+          </div>
+          <div class="form-group">
+            <label for="bf-dealer-contact">Point of Contact &amp; Title</label>
+            <input type="text" id="bf-dealer-contact" placeholder="e.g. Alex Rivera, Marketing Manager">
+          </div>
         </div>
-        <div class="form-group">
-          <label for="bf-mods">Notable Mods / Build Details</label>
-          <input type="text" id="bf-mods" placeholder="e.g. widebody, coilovers, carbon roof">
+        <div class="form-row two">
+          <div class="form-group">
+            <label for="bf-fleet-size">Vehicles Available Monthly</label>
+            <select id="bf-fleet-size">
+              <option value="">Select one</option>
+              <option value="1-10 vehicles/month">1–10 vehicles/month</option>
+              <option value="11-20 vehicles/month">11–20 vehicles/month</option>
+              <option value="21-40 vehicles/month">21–40 vehicles/month</option>
+              <option value="40+ vehicles/month">40+ vehicles/month</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="bf-cadence">Preferred Content Cadence</label>
+            <select id="bf-cadence">
+              <option value="">Select one</option>
+              <option value="Weekly">Weekly</option>
+              <option value="Bi-weekly">Bi-weekly</option>
+              <option value="Monthly">Monthly</option>
+              <option value="As new inventory arrives">As new inventory arrives</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="bf-current-solution">Current Photography Solution (if any)</label>
+            <input type="text" id="bf-current-solution" placeholder="e.g. in-house smartphone photos, another photographer, none">
+          </div>
+        </div>
+      </div>
+
+      <!-- MULTI-CAR / BIKE SESSION: up to 3 vehicles -->
+      <div data-for-client="multi">
+        <p class="form-section-label">Your Vehicles</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label>How many vehicles/bikes are in this session? *</label>
+            <div class="pill-group">
+              <label class="pill-label"><input type="radio" name="bf-vehicle-count" value="2" onchange="toggleMultiVehicle(3,false)"><span>2</span></label>
+              <label class="pill-label"><input type="radio" name="bf-vehicle-count" value="3" onchange="toggleMultiVehicle(3,true)"><span>3</span></label>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="bf-vehicle1">Vehicle/Bike 1 — Year, Make, Model, Color *</label>
+            <input type="text" id="bf-vehicle1" placeholder="e.g. 2022 Subaru WRX, WR Blue">
+            <span class="field-error" id="berr-vehicle1"></span>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="bf-vehicle2">Vehicle/Bike 2 — Year, Make, Model, Color</label>
+            <input type="text" id="bf-vehicle2" placeholder="e.g. 2021 Harley-Davidson Fat Boy, Black">
+          </div>
+        </div>
+        <div class="form-row" id="vehicle3Row" style="display:none">
+          <div class="form-group">
+            <label for="bf-vehicle3">Vehicle/Bike 3 — Year, Make, Model, Color</label>
+            <input type="text" id="bf-vehicle3" placeholder="e.g. 2020 Ford Mustang GT, Race Red">
+          </div>
+        </div>
+        <div class="form-row two">
+          <div class="form-group">
+            <label for="bf-relationship">Who's involved in this session?</label>
+            <select id="bf-relationship">
+              <option value="">Select one</option>
+              <option value="Same owner, multiple vehicles">Same owner, multiple vehicles</option>
+              <option value="Car/bike club or meet group">Car/bike club or meet group</option>
+              <option value="Friends">Friends</option>
+              <option value="Family">Family</option>
+              <option value="Dealership fleet">Dealership fleet</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Shot composition preference</label>
+            <div class="pill-group">
+              <label class="pill-label"><input type="checkbox" name="bf-group-shots" value="Individual shots of each vehicle"><span>Individual shots</span></label>
+              <label class="pill-label"><input type="checkbox" name="bf-group-shots" value="Full group shots together"><span>Full group shots</span></label>
+              <label class="pill-label"><input type="checkbox" name="bf-group-shots" value="Both individual and group"><span>Both</span></label>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -390,7 +499,7 @@
 
       <!-- SECTION 7: EXPERIENCE & BUDGET -->
       <p class="form-section-label">A Few More Things</p>
-      <div class="form-row">
+      <div class="form-row" data-for-client="owner multi">
         <div class="form-group">
           <label for="bf-experience">Have you done an automotive shoot before?</label>
           <select id="bf-experience">
@@ -402,7 +511,7 @@
           </select>
         </div>
       </div>
-      <div class="form-row">
+      <div class="form-row" data-for-client="owner multi">
         <div class="form-group">
           <label for="bf-budget-flex">Is your budget flexible if the shoot scope expands?</label>
           <select id="bf-budget-flex">
