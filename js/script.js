@@ -17,6 +17,9 @@ function toggleTheme() {
 
 /* ── HOME GALLERY DATA ──────────────────────────────────────── */
 const galleryItems = [
+  { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf9444-mKww4Zq7y434RsMp.webp', model: 'Lexus IS F Sport', detail: '@hendricklexusnorthlake', slug: 'lexus-is-f-sport' },
+  { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf4663-54xghVWYFGEtuhzj.webp', model: 'BMW iX3', detail: 'Octagon Marketing x BMW', slug: 'bmw-ix3' },
+  { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf9355-25bQ9y32bXFCL2Fl.webp', model: 'Acura Integra Type S', detail: '@charlottemotorspeedway', slug: 'acura-integra-type-s' },
   { src: 'https://assets.zyrosite.com/Jt4lDSQe2RLluQD3/_dsf8480-GVkbqDnernn7OdMM.webp', model: 'Ford Mustang', detail: '@sky5oh', slug: 'ford-mustang' },
   { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf6832-7HmGZG1VeOLH5FKI.webp', model: 'Volkswagen Jetta SE', detail: '@leiadakrozjhen', slug: 'volkswagen-jetta-se' },
   { src: 'https://assets.zyrosite.com/Jt4lDSQe2RLluQD3/_dsf2254-ibThNyvEAcCqIl20.webp', model: 'Ford Mustang Duo', detail: '@gt5.0jose', slug: 'ford-mustang-duo' },
