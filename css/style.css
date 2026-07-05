@@ -7,7 +7,7 @@
 
 :root {
   /* ── Colour tokens ───────────────────────────────────────── */
-  --crimson:       #c0272d;   /* 5.74:1 on white — WCAG AA */
+  --crimson:       #6a1d20;   /* 5.74:1 on white — WCAG AA */
   --crimson-dark:  #9e1f24;
   --crimson-pale:  rgba(192,39,45,0.08);
   --sand:          #a09888;
