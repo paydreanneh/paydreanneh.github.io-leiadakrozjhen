@@ -44,7 +44,7 @@
   --card-bg:       #161513;
   --input-bg:      #1c1a18;
   --shadow:        rgba(0,0,0,0.4);
-  --crimson:       #d63a40;  /* slightly brighter in dark mode for contrast */
+  --crimson:       #9b1212; /* d63a40 */  /* slightly brighter in dark mode for contrast */
 }
 
 /* ── Smooth colour transitions ──────────────────────────────── */
