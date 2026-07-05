@@ -430,12 +430,33 @@ function getDateHint(dateStr) {
 }
 
 /* ── BOOKING ────────────────────────────────────────────────── */
+let currentClientType = 'owner';
+
 function selectClient(type, btn) {
   document.querySelectorAll('.client-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   document.querySelectorAll('.packages-wrap').forEach(p => p.classList.remove('active'));
   document.getElementById('pkg-' + type)?.classList.add('active');
   document.getElementById('bookingForm')?.classList.remove('open');
+}
+
+function updateClientFields(clientType) {
+  currentClientType = clientType;
+  const form = document.getElementById('bookingFormInner');
+  if (!form) return;
+  form.querySelectorAll('[data-for-client]').forEach(el => {
+    const allowed = el.dataset.forClient.split(' ');
+    el.style.display = allowed.includes(clientType) ? '' : 'none';
+  });
+}
+
+function toggleMultiVehicle(num, show) {
+  const row = document.getElementById('vehicle' + num + 'Row');
+  if (row) row.style.display = show ? '' : 'none';
+  if (!show) {
+    const input = document.getElementById('bf-vehicle' + num);
+    if (input) input.value = '';
+  }
 }
 
 function openBookingForm(clientType, pkg) {
@@ -446,6 +467,7 @@ function openBookingForm(clientType, pkg) {
   if (labelEl) labelEl.textContent = pkg;
   if (innerEl) innerEl.style.display = '';
   if (successEl) successEl.style.display = 'none';
+  updateClientFields(clientType);
   if (section) {
     section.classList.add('open');
     setTimeout(() => section.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
@@ -553,8 +575,16 @@ function initContactForm() {
 function initBookingForm() {
   const bookingForm = document.getElementById('bookingForm');
   if (!bookingForm) return;
+  updateClientFields('owner');
 
-  const REQUIRED = ['bf-fname', 'bf-lname', 'bf-email', 'bf-vehicle', 'bf-date', 'bf-time'];
+  const REQUIRED_COMMON = ['bf-fname', 'bf-lname', 'bf-email', 'bf-date', 'bf-time'];
+  const REQUIRED_BY_CLIENT = {
+    owner: ['bf-vehicle'],
+    dealer: ['bf-dealer-name'],
+    multi: ['bf-vehicle1'],
+  };
+  const ALL_CONDITIONAL = Object.values(REQUIRED_BY_CLIENT).flat();
+  function getRequired() { return REQUIRED_COMMON.concat(REQUIRED_BY_CLIENT[currentClientType] || []); }
   const getEl = id => document.getElementById(id);
   const getErr = id => document.getElementById('berr-' + id.replace('bf-', ''));
 
@@ -620,6 +650,8 @@ function initBookingForm() {
     if (!el) return true;
     const v = el.value?.trim() || '';
 
+    if (!getRequired().includes(id) && !v) { setField(el, null, err); return true; }
+
     if (id === 'bf-fname') {
       if (!v) { setField(el, null, err); return false; }
       if (!validateName(v)) { setField(el, false, err, 'Letters, hyphens, and apostrophes only.'); return false; }
@@ -648,8 +680,8 @@ function initBookingForm() {
     return true;
   }
 
-  // Live validation — all required fields
-  REQUIRED.forEach(id => {
+  // Live validation — all fields that are required under any client type
+  REQUIRED_COMMON.concat(ALL_CONDITIONAL).forEach(id => {
     const el = getEl(id); if (!el) return;
     el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', () => {
       // For date/time — always refresh both fields together
@@ -660,7 +692,7 @@ function initBookingForm() {
 
   document.getElementById('bookingSubmitBtn')?.addEventListener('click', async function (e) {
     e.preventDefault();
-    if (REQUIRED.map(id => validateBF(id)).some(r => !r)) {
+    if (getRequired().map(id => validateBF(id)).some(r => !r)) {
       bookingForm.querySelector('.invalid')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
@@ -670,17 +702,43 @@ function initBookingForm() {
     const g = id => getEl(id)?.value?.trim() || '';
     const chk = name => Array.from(bookingForm.querySelectorAll(`input[name="${name}"]:checked`)).map(i => i.value).join(', ');
 
+    let vehicleBlock;
+    if (currentClientType === 'dealer') {
+      vehicleBlock = [
+        `DEALERSHIP`,
+        `Dealership:       ${g('bf-dealer-name')}`,
+        `Contact:          ${g('bf-dealer-contact') || 'Not specified'}`,
+        `Fleet size:       ${g('bf-fleet-size') || 'Not specified'}`,
+        `Content cadence:  ${g('bf-cadence') || 'Not specified'}`,
+        `Current solution: ${g('bf-current-solution') || 'Not specified'}`,
+      ];
+    } else if (currentClientType === 'multi') {
+      vehicleBlock = [
+        `VEHICLES (GROUP SESSION)`,
+        `Vehicle 1:     ${g('bf-vehicle1')}`,
+        `Vehicle 2:     ${g('bf-vehicle2') || 'Not specified'}`,
+        `Vehicle 3:     ${g('bf-vehicle3') || 'Not specified'}`,
+        `Relationship:  ${g('bf-relationship') || 'Not specified'}`,
+        `Shot prefs:    ${chk('bf-group-shots') || 'Not specified'}`,
+      ];
+    } else {
+      vehicleBlock = [
+        `VEHICLE`,
+        `Vehicle:  ${g('bf-vehicle')}`,
+        `Color:    ${g('bf-color') || 'Not specified'}`,
+        `Mods:     ${g('bf-mods') || 'None listed'}`,
+      ];
+    }
+
     const message = [
       `BOOKING REQUEST — ${pkg}`,
       `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
+      `Client type: ${currentClientType === 'dealer' ? 'Dealership' : currentClientType === 'multi' ? 'Multi-Car/Bike Session' : 'Private Owner'}`,
       `Name:   ${g('bf-fname')} ${g('bf-lname')}`,
       `Email:  ${g('bf-email')}`,
       `Phone:  ${g('bf-phone') || 'Not provided'}`,
       ``,
-      `VEHICLE`,
-      `Vehicle:  ${g('bf-vehicle')}`,
-      `Color:    ${g('bf-color') || 'Not specified'}`,
-      `Mods:     ${g('bf-mods') || 'None listed'}`,
+      ...vehicleBlock,
       ``,
       `DATE & TIME`,
       `Preferred Date:   ${g('bf-date')}`,
@@ -776,6 +834,302 @@ function initNewsletter() {
   });
 }
 
+/* ── GALLERY FX (per-vehicle ambient animations) ─────────────── */
+function isReducedMotion() {
+  return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+function isDarkTheme() {
+  return document.documentElement.getAttribute('data-theme') === 'dark';
+}
+function isLightboxOpen() {
+  return document.getElementById('lightbox')?.classList.contains('lb-open') || false;
+}
+
+function setupFxCanvas(wrap, front) {
+  const canvas = document.createElement('canvas');
+  canvas.className = 'gallery-fx-canvas' + (front ? ' fx-front' : '');
+  if (front) wrap.appendChild(canvas); else wrap.insertBefore(canvas, wrap.firstChild);
+  const ctx = canvas.getContext('2d');
+  function resize() {
+    const w = wrap.clientWidth, h = wrap.clientHeight;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.max(1, w * dpr);
+    canvas.height = Math.max(1, h * dpr);
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  new ResizeObserver(resize).observe(wrap);
+  return { canvas, ctx, resize };
+}
+
+// Runs a rAF loop only while the wrap is on-screen and motion isn't reduced
+function runFxLoop(wrap, drawFn) {
+  if (isReducedMotion()) return;
+  let running = false, raf = null;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      running = e.isIntersecting;
+      if (running && !raf) tick();
+    });
+  }, { threshold: 0.01 });
+  io.observe(wrap);
+  let last = performance.now();
+  function tick(now) {
+    if (!running) { raf = null; return; }
+    now = now || performance.now();
+    const dt = Math.min((now - last) / 1000, 0.05);
+    last = now;
+    drawFn(dt);
+    raf = requestAnimationFrame(tick);
+  }
+}
+
+function hexToRgba(hex, a) {
+  const n = parseInt(hex.replace('#',''), 16);
+  return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`;
+}
+
+/* — Lexus LC500: rising embers, white (light) / purple (dark) — */
+function initLexusFX() {
+  const wrap = document.getElementById('lexusFxWrap');
+  if (!wrap) return;
+  const back = setupFxCanvas(wrap, false);
+  const front = setupFxCanvas(wrap, true);
+
+  function makeParticles(n) {
+    const arr = [];
+    for (let i = 0; i < n; i++) {
+      arr.push({
+        x: Math.random(),
+        y: Math.random(),
+        r: 1.4 + Math.random() * 2.8,
+        speed: 7 + Math.random() * 12,
+        drift: (Math.random() - 0.5) * 10,
+        phase: Math.random() * Math.PI * 2,
+      });
+    }
+    return arr;
+  }
+  // More particles + brighter glow so the embers read clearly against the gallery
+  const backParticles = makeParticles(46);
+  const frontParticles = makeParticles(20);
+
+  function draw(ctxObj, particles, baseAlpha, dt) {
+    const { ctx, canvas } = ctxObj;
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    ctx.clearRect(0, 0, w, h);
+    const subtle = isLightboxOpen();
+    const color = isDarkTheme() ? [186, 120, 255] : [255, 255, 255];
+    const alphaMul = subtle ? 0.35 : 1;
+    particles.forEach(p => {
+      p.y -= (p.speed / h) * dt;
+      p.phase += dt;
+      if (p.y < -0.02) { p.y = 1.02; p.x = Math.random(); }
+      const px = (p.x + Math.sin(p.phase) * (p.drift / w)) * w;
+      const py = p.y * h;
+      // Fade like embers as they approach the top quarter of the page
+      const fade = Math.min(1, p.y / 0.28);
+      const a = baseAlpha * alphaMul * fade;
+      if (a <= 0.005) return;
+      const grad = ctx.createRadialGradient(px, py, 0, px, py, p.r * 5);
+      grad.addColorStop(0, `rgba(${color[0]},${color[1]},${color[2]},${a})`);
+      grad.addColorStop(0.5, `rgba(${color[0]},${color[1]},${color[2]},${a * 0.4})`);
+      grad.addColorStop(1, `rgba(${color[0]},${color[1]},${color[2]},0)`);
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(px, py, p.r * 5, 0, Math.PI * 2);
+      ctx.fill();
+      // Bright core
+      ctx.fillStyle = `rgba(${color[0]},${color[1]},${color[2]},${Math.min(1, a * 1.6)})`;
+      ctx.beginPath();
+      ctx.arc(px, py, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+  }
+
+  runFxLoop(wrap, dt => {
+    draw(back, backParticles, 0.7, dt);
+    draw(front, frontParticles, 0.55, dt);
+  });
+}
+
+/* — Porsche Panamera 4S: falling leaves, red/orange/amber — */
+function initPorscheFX() {
+  const wrap = document.getElementById('porscheFxWrap');
+  if (!wrap) return;
+  const back = setupFxCanvas(wrap, false);
+  const front = setupFxCanvas(wrap, true);
+  const colors = ['#c0272d', '#d9691f', '#e0a337'];
+
+  function makeLeaves(n) {
+    const arr = [];
+    for (let i = 0; i < n; i++) {
+      arr.push({
+        x: Math.random(),
+        y: Math.random(),
+        size: 6 + Math.random() * 6,
+        speed: 10 + Math.random() * 12,
+        sway: (Math.random() - 0.5) * 18,
+        phase: Math.random() * Math.PI * 2,
+        rot: Math.random() * Math.PI * 2,
+        rotSpeed: (Math.random() - 0.5) * 0.7,
+        color: colors[i % colors.length],
+      });
+    }
+    return arr;
+  }
+  // Split across both layers so leaves fall both behind and in front of the photos
+  const backLeaves = makeLeaves(24);
+  const frontLeaves = makeLeaves(18);
+
+  function drawLeaf(ctx, x, y, size, rot, color, alpha) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(rot);
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = color;
+    ctx.shadowColor = color;
+    ctx.shadowBlur = 7;
+    ctx.beginPath();
+    ctx.moveTo(0, -size);
+    ctx.quadraticCurveTo(size * 0.8, -size * 0.3, 0, size);
+    ctx.quadraticCurveTo(-size * 0.8, -size * 0.3, 0, -size);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function draw(ctxObj, leaves, baseAlpha, dt) {
+    const { ctx, canvas } = ctxObj;
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    ctx.clearRect(0, 0, w, h);
+    const subtle = isLightboxOpen();
+    const alphaMul = subtle ? 0.3 : 1;
+    leaves.forEach(l => {
+      l.y += (l.speed / h) * dt;
+      l.phase += dt * 0.8;
+      l.rot += l.rotSpeed * dt;
+      if (l.y > 1.02) { l.y = -0.02; l.x = Math.random(); }
+      const px = (l.x + Math.sin(l.phase) * (l.sway / w)) * w;
+      const py = l.y * h;
+      // Fade as they near the bottom of the page
+      const fade = Math.min(1, (1 - l.y) / 0.25);
+      const a = baseAlpha * alphaMul * fade;
+      if (a <= 0.01) return;
+      drawLeaf(ctx, px, py, l.size, l.rot, l.color, a);
+    });
+  }
+
+  runFxLoop(wrap, dt => {
+    draw(back, backLeaves, 0.68, dt);
+    draw(front, frontLeaves, 0.6, dt);
+  });
+}
+
+/* — Subaru WRX: red leaves blowing left → right, passing behind and in front of every image — */
+function initSubaruFX() {
+  const wrap = document.getElementById('subaruFxWrap');
+  if (!wrap) return;
+  const back = setupFxCanvas(wrap, false);
+  const front = setupFxCanvas(wrap, true);
+
+  function makeRedLeaves(n) {
+    const arr = [];
+    for (let i = 0; i < n; i++) {
+      arr.push({
+        x: Math.random() * 1.4 - 0.4,
+        y: 0.02 + Math.random() * 0.96, // spread across the full height of the gallery
+        size: 6 + Math.random() * 6,
+        speed: 0.05 + Math.random() * 0.055,
+        sway: 12 + Math.random() * 16,
+        phase: Math.random() * Math.PI * 2,
+        rot: Math.random() * Math.PI * 2,
+        rotSpeed: (Math.random() - 0.5) * 0.65,
+      });
+    }
+    return arr;
+  }
+  // Split across both layers so leaves pass both behind and in front of every photo, left to right
+  const backLeaves = makeRedLeaves(40);
+  const frontLeaves = makeRedLeaves(30);
+
+  function drawLeaf(ctx, x, y, size, rot, alpha) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(rot);
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = '#c0272d';
+    ctx.shadowColor = '#c0272d';
+    ctx.shadowBlur = 6;
+    ctx.beginPath();
+    ctx.moveTo(0, -size);
+    ctx.quadraticCurveTo(size * 0.8, -size * 0.3, 0, size);
+    ctx.quadraticCurveTo(-size * 0.8, -size * 0.3, 0, -size);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function draw(ctxObj, leaves, baseAlpha, dt) {
+    const { ctx, canvas } = ctxObj;
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    ctx.clearRect(0, 0, w, h);
+    const subtle = isLightboxOpen();
+    const alphaMul = subtle ? 0.35 : 1;
+    leaves.forEach(l => {
+      l.x += l.speed * dt; // steady left → right drift
+      l.phase += dt * 0.9;
+      l.rot += l.rotSpeed * dt;
+      if (l.x > 1.3) { l.x = -0.3; }
+      const px = l.x * w;
+      const py = l.y * h + Math.sin(l.phase) * l.sway;
+      drawLeaf(ctx, px, py, l.size, l.rot, baseAlpha * alphaMul);
+    });
+  }
+
+  runFxLoop(wrap, dt => {
+    draw(back, backLeaves, 0.62, dt);
+    draw(front, frontLeaves, 0.55, dt);
+  });
+}
+
+/* — BMW iX3: ambient backdrop (particles/lightning) removed for now —
+   keeping only the electric-border highlight on hover / the active
+   lightbox image, since that isn't a canvas particle or lightning effect. */
+function initBmwFX() {
+  const wrap = document.getElementById('bmwFxWrap');
+  if (!wrap) return;
+
+  // Electric border traces the currently active image in the lightbox
+  const items = Array.from(document.querySelectorAll('#vehicleGallery .vg-item'));
+  const lb = document.getElementById('lightbox');
+  if (lb && items.length) {
+    const mo = new MutationObserver(() => {
+      items.forEach(el => el.classList.remove('vg-electric-active'));
+      if (lb.classList.contains('lb-open')) {
+        const counter = document.getElementById('lbCounter')?.textContent || '';
+        const idx = parseInt(counter.split('/')[0], 10) - 1;
+        if (items[idx]) items[idx].classList.add('vg-electric-active');
+      }
+    });
+    mo.observe(lb, { attributes: true, attributeFilter: ['class'] });
+    const counterEl = document.getElementById('lbCounter');
+    if (counterEl) new MutationObserver(() => {
+      items.forEach(el => el.classList.remove('vg-electric-active'));
+      const idx = parseInt((counterEl.textContent || '').split('/')[0], 10) - 1;
+      if (lb.classList.contains('lb-open') && items[idx]) items[idx].classList.add('vg-electric-active');
+    }).observe(counterEl, { childList: true, characterData: true, subtree: true });
+  }
+}
+
+function initGalleryFX() {
+  initLexusFX();
+  initPorscheFX();
+  initSubaruFX();
+  initBmwFX();
+}
+
 /* ── INIT ───────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.theme-toggle,.mobile-theme-toggle').forEach(btn => btn.addEventListener('click', toggleTheme));
@@ -789,4 +1143,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initBookingForm();
   initVehicleGallery();
   initNewsletter();
+  initGalleryFX();
 });
