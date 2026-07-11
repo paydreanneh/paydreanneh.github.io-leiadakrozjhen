@@ -7,6 +7,26 @@
   const saved = localStorage.getItem('lk-theme') || 'light';
   document.documentElement.setAttribute('data-theme', saved);
 })();
+
+/* ── ANNOUNCEMENT BAR ───────────────────────────────────────── */
+(function () {
+  if (localStorage.getItem('lk-announce-dismissed') === 'true') {
+    document.documentElement.style.setProperty('--announce-h', '0px');
+  }
+})();
+function initAnnounceBar() {
+  const bar = document.getElementById('announceBar');
+  const closeBtn = document.getElementById('announceClose');
+  if (!bar || !closeBtn) return;
+  if (localStorage.getItem('lk-announce-dismissed') === 'true') {
+    bar.style.display = 'none';
+  }
+  closeBtn.addEventListener('click', () => {
+    document.documentElement.style.setProperty('--announce-h', '0px');
+    bar.style.display = 'none';
+    localStorage.setItem('lk-announce-dismissed', 'true');
+  });
+}
 function applyTheme(t) {
   document.documentElement.setAttribute('data-theme', t);
   localStorage.setItem('lk-theme', t);
@@ -17,11 +37,12 @@ function toggleTheme() {
 
 /* ── HOME GALLERY DATA ──────────────────────────────────────── */
 const galleryItems = [
-  { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf9444-mKww4Zq7y434RsMp.webp', model: 'Lexus IS F Sport', detail: '@hendricklexusnorthlake', slug: 'lexus-is-f-sport' },
-  { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf4663-54xghVWYFGEtuhzj.webp', model: 'BMW iX3', detail: 'Octagon Marketing x BMW', slug: 'bmw-ix3' },
+  // Commented out per Paydreanne + Jax review — weakest work on the home page. Kept here, not deleted, in case any get swapped back in later.
+  // { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf9444-mKww4Zq7y434RsMp.webp', model: 'Lexus IS F Sport', detail: '@hendricklexusnorthlake', slug: 'lexus-is-f-sport' },
+  { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf0025-7GvBDyeGgDPegmSl.webp', model: 'BMW iX3', detail: 'Octagon Marketing x BMW', slug: 'bmw-ix3' },
   { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf9355-25bQ9y32bXFCL2Fl.webp', model: 'Acura Integra Type S', detail: '@charlottemotorspeedway', slug: 'acura-integra-type-s' },
-  { src: 'https://assets.zyrosite.com/Jt4lDSQe2RLluQD3/_dsf8480-GVkbqDnernn7OdMM.webp', model: 'Ford Mustang', detail: '@sky5oh', slug: 'ford-mustang' },
-  { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf6832-7HmGZG1VeOLH5FKI.webp', model: 'Volkswagen Jetta SE', detail: '@leiadakrozjhen', slug: 'volkswagen-jetta-se' },
+  // { src: 'https://assets.zyrosite.com/Jt4lDSQe2RLluQD3/_dsf8480-GVkbqDnernn7OdMM.webp', model: 'Ford Mustang', detail: '@sky5oh', slug: 'ford-mustang' },
+  // { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf6832-7HmGZG1VeOLH5FKI.webp', model: 'Volkswagen Jetta SE', detail: '@leiadakrozjhen', slug: 'volkswagen-jetta-se' },
   { src: 'https://assets.zyrosite.com/Jt4lDSQe2RLluQD3/_dsf2254-ibThNyvEAcCqIl20.webp', model: 'Ford Mustang Duo', detail: '@gt5.0jose', slug: 'ford-mustang-duo' },
   { src: 'https://assets.zyrosite.com/Jt4lDSQe2RLluQD3/_dsf1764-FbJvI6um9FjYGtEy.webp', model: '2026 Corvette E-Ray', detail: '@pilot.corey', slug: 'corvette-eray' },
   { src: 'https://assets.zyrosite.com/Jt4lDSQe2RLluQD3/_dsf1510-1QJdFqydaiJcojW9.webp', model: 'Pontiac Star Chief', detail: '@charlottemotorspeedway', slug: 'pontiac-star-chief' },
@@ -31,48 +52,88 @@ const galleryItems = [
   { src: 'https://assets.zyrosite.com/Jt4lDSQe2RLluQD3/_dsf2221-Cuj8yliVJc9e9VwD.webp', model: 'Porsche Panamera 4S', detail: '@acjphoto', slug: 'porsche-panamera-4s' },
   { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf6500-Ts6Zh68eMMBnYlly.webp', model: 'Lexus IS 350', detail: '@hungis350', slug: 'lexus-is350' },
   { src: 'https://assets.zyrosite.com/Jt4lDSQe2RLluQD3/_dsf5581-1-i2Ft9tJYShu4Ym5A.webp', model: 'Black Behind Bars Exhibition', detail: '@acjphoto × @independenceharleydavidson', slug: 'harley-exhibition' },
-  { src: 'https://assets.zyrosite.com/Jt4lDSQe2RLluQD3/_dsf2430-8iQWTpAylngBjKpb.webp', model: 'Genesis G70', detail: '@mcrossmedia', slug: 'genesis-g70' },
-  { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf4023-2KHB2aVhUdudVWKF.webp', model: 'Project Tohru', detail: '@leiadakrozjhen', slug: 'project-tohru' },
+  // { src: 'https://assets.zyrosite.com/Jt4lDSQe2RLluQD3/_dsf2430-8iQWTpAylngBjKpb.webp', model: 'Genesis G70', detail: '@mcrossmedia', slug: 'genesis-g70' },
+  // { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf4023-2KHB2aVhUdudVWKF.webp', model: 'Project Tohru', detail: '@leiadakrozjhen', slug: 'project-tohru' },
 ];
 
 /* ── HOME GALLERY ───────────────────────────────────────────── */
+function makeGalleryItem(item) {
+  const div = document.createElement('div');
+  div.className = 'gallery-item';
+  div.setAttribute('role', 'button');
+  div.setAttribute('tabindex', '0');
+  div.setAttribute('aria-label', `View ${item.model} gallery`);
+  div.innerHTML = `
+    <img src="${item.src}" alt="${item.model}" loading="lazy">
+    <div class="gallery-overlay">
+      <div class="overlay-label">
+        <p class="model">${item.model}</p>
+        ${item.detail ? `<p class="detail">${item.detail}</p>` : ''}
+        <span class="overlay-view-btn">View Gallery →</span>
+      </div>
+    </div>`;
+  div.addEventListener('click', () => { window.location.href = `${item.slug}/`; });
+  div.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') window.location.href = `${item.slug}/`; });
+  return div;
+}
+
 function buildGallery() {
   const gallery = document.getElementById('gallery');
   if (!gallery) return;
   const w = window.innerWidth;
-  const numCols = w <= 680 ? 1 : w <= 1024 ? 2 : 3;
+  const isMobile = w <= 680;
   gallery.innerHTML = '';
-  const colDivs = [];
-  for (let i = 0; i < numCols; i++) {
-    const c = document.createElement('div');
-    c.className = 'gallery-column';
-    colDivs.push(c);
-    gallery.appendChild(c);
+
+  if (isMobile) {
+    /* Single horizontally-swipeable row — no columns, no vertical stacking. */
+    gallery.classList.add('mobile-scroll');
+    galleryItems.forEach(item => gallery.appendChild(makeGalleryItem(item)));
+  } else {
+    gallery.classList.remove('mobile-scroll');
+    const numCols = w <= 1024 ? 2 : 3;
+    const colDivs = [];
+    for (let i = 0; i < numCols; i++) {
+      const c = document.createElement('div');
+      c.className = 'gallery-column';
+      colDivs.push(c);
+      gallery.appendChild(c);
+    }
+    galleryItems.forEach((item, i) => colDivs[i % numCols].appendChild(makeGalleryItem(item)));
   }
-  galleryItems.forEach((item, i) => {
-    const div = document.createElement('div');
-    div.className = 'gallery-item';
-    div.setAttribute('role', 'button');
-    div.setAttribute('tabindex', '0');
-    div.setAttribute('aria-label', `View ${item.model} gallery`);
-    div.innerHTML = `
-      <img src="${item.src}" alt="${item.model}" loading="lazy">
-      <div class="gallery-overlay">
-        <div class="overlay-label">
-          <p class="model">${item.model}</p>
-          ${item.detail ? `<p class="detail">${item.detail}</p>` : ''}
-          <span class="overlay-view-btn">View Gallery →</span>
-        </div>
-      </div>`;
-    div.addEventListener('click', () => { window.location.href = `${item.slug}/`; });
-    div.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') window.location.href = `${item.slug}/`; });
-    colDivs[i % numCols].appendChild(div);
-  });
+
   requestAnimationFrame(() => {
     gallery.classList.add('loaded');
     gallery.querySelectorAll('.gallery-item').forEach((el, i) => setTimeout(() => el.classList.add('visible'), 80 + i * 40));
   });
 }
+
+function initGalleryArrows() {
+  const gallery = document.getElementById('gallery');
+  const left = document.getElementById('galleryArrowLeft');
+  const right = document.getElementById('galleryArrowRight');
+  if (!gallery || !left || !right) return;
+
+  const scrollAmount = () => Math.min(gallery.clientWidth * 0.85, 360);
+  left.addEventListener('click', () => gallery.scrollBy({ left: -scrollAmount(), behavior: 'smooth' }));
+  right.addEventListener('click', () => gallery.scrollBy({ left: scrollAmount(), behavior: 'smooth' }));
+
+  const updateArrowState = () => {
+    if (!gallery.classList.contains('mobile-scroll')) {
+      left.style.display = 'none';
+      right.style.display = 'none';
+      return;
+    }
+    left.style.display = '';
+    right.style.display = '';
+    const maxScroll = gallery.scrollWidth - gallery.clientWidth;
+    left.classList.toggle('is-disabled', gallery.scrollLeft <= 4);
+    right.classList.toggle('is-disabled', gallery.scrollLeft >= maxScroll - 4);
+  };
+  gallery.addEventListener('scroll', updateArrowState, { passive: true });
+  window.addEventListener('resize', () => setTimeout(updateArrowState, 300));
+  setTimeout(updateArrowState, 300);
+}
+
 let resizeTimer;
 window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(buildGallery, 250); });
 
@@ -1133,7 +1194,9 @@ function initGalleryFX() {
 /* ── INIT ───────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.theme-toggle,.mobile-theme-toggle').forEach(btn => btn.addEventListener('click', toggleTheme));
+  initAnnounceBar();
   buildGallery();
+  initGalleryArrows();
   initReveal();
   initNavScroll();
   setYear();
