@@ -10,6 +10,10 @@
 <link rel="icon" type="image/x-icon" href="https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/apple-touch-icon-ADNHfY6c3biWe2EO.png">
 </head>
 <body>
+<div class="announce-bar" id="announceBar">
+  <p>More projects dropping soon!</p>
+  <button class="announce-close" id="announceClose" aria-label="Dismiss announcement">&times;</button>
+</div>
 <nav id="mainNav">
   <div class="nav-inner">
     <a href="./" class="nav-logo">Leiada Krözjhen</a>
@@ -17,7 +21,7 @@
       <ul class="nav-links">
         <li><a href="./"  class="active">Work</a></li>
         <li><a href="book/">Book Me</a></li>
-        <li><a href="prints/">Prints</a></li>
+        <!-- <li><a href="prints/">Prints</a></li> -->
         <li><a href="blog/">Blog</a></li>
         <li><a href="contact/">Contact</a></li>
       </ul>
@@ -36,7 +40,7 @@
   <ul>
     <li><a href="./"  class="active">Work</a></li>
     <li><a href="book/">Book Me</a></li>
-    <li><a href="prints/">Prints</a></li>
+    <!-- <li><a href="prints/">Prints</a></li> -->
     <li><a href="blog/">Blog</a></li>
     <li><a href="contact/">Contact</a></li>
   </ul>
@@ -54,13 +58,21 @@
     </button>
   </div>
 </div>
-<div class="wrap">
-  <div class="hero-text">
-    <h1>Forza-trained,<br><em>real-world certified.</em></h1>
-    <p>Automotive Photography · Charlotte, NC</p>
+<section class="home-hero">
+  <div class="home-hero-inner">
+    <div class="home-hero-text">
+      <h1>Forza-trained,<br><em>real-world certified.</em></h1>
+      <p>Automotive Photography · Charlotte, NC</p>
+      <div class="home-hero-cta">
+        <a href="book/" class="hero-btn hero-btn-primary">Book Me</a>
+        <a href="contact/" class="hero-btn hero-btn-secondary">Contact Me</a>
+      </div>
+    </div>
+    <div class="home-hero-media">
+      <img src="https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf1718-4YgKWFi1l1LjB6x6.webp" alt="Leiada Krözjhen — automotive photography">
+    </div>
   </div>
-  <div class="gallery-grid" id="gallery"></div>
-</div>
+</section>
 
 <div class="brands-strip">
   <div class="brands-inner">
@@ -73,28 +85,83 @@
 </div>
 
 <div class="wrap">
-  <section class="about-section">
-    <div class="about-grid">
-      <div class="about-img-wrap reveal">
-        <div class="about-photo-placeholder">
-          <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,fit=crop/Jt4lDSQe2RLluQD3/_dsf8843-1-1-1-azsVNRbHnX7k9bby.jpg" alt="Paydreanne — Leiada Krözjhen">
+  <div class="gallery-scroll-wrap">
+    <div class="gallery-grid" id="gallery"></div>
+    <button class="gallery-arrow gallery-arrow-left" id="galleryArrowLeft" aria-label="Scroll gallery left">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="gallery-arrow gallery-arrow-right" id="galleryArrowRight" aria-label="Scroll gallery right">
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="about-backdrop">
+  <div class="wrap">
+    <section class="about-section">
+      <div class="about-grid">
+        <div class="about-img-wrap reveal">
+          <div class="about-photo-placeholder">
+            <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,fit=crop/Jt4lDSQe2RLluQD3/_dsf8843-1-1-1-azsVNRbHnX7k9bby.jpg" alt="Paydreanne — Leiada Krözjhen">
+          </div>
+        </div>
+        <div class="about-text reveal">
+          <p class="eyebrow">Behind the camera</p>
+          <h2>Hello, I'm<br>Paydreanne.</h2>
+          <p>Also known as <em>"Leiada Krözjhen"</em> — I'm an automotive photographer based in Charlotte, NC. I've been shooting since 2018, capturing street portraits, architecture, community events, and more.</p>
+          <p>After landing a real-estate photography job in 2024, I quickly found myself dissatisfied with the routine of it all. Meanwhile I was deep in Forza Horizon 5, obsessing over the graphics and unique looks of different cars, when it hit me.</p>
+          <blockquote class="quote">"What if I tried out car photography?"</blockquote>
+          <p>So, in 2025, I made the switch getting to collaborate with my local Porsche and Genesis dealerships, and continuing to push the limits of what automotive imagery could look like.</p>
+          <a href="book/" class="cta-link">
+            Book a session
+            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
         </div>
       </div>
-      <div class="about-text reveal">
-        <p class="eyebrow">Behind the camera</p>
-        <h2>Hello, I'm<br>Paydreanne.</h2>
-        <p>Also known as <em>"Leiada Krözjhen"</em> — I'm an automotive photographer based in Charlotte, NC. I've been shooting since 2018, capturing street portraits, architecture, community events, and more.</p>
-        <p>After landing a real-estate photography job in 2024, I quickly found myself dissatisfied with the routine of it all. Meanwhile I was deep in Forza Horizon 5, obsessing over the graphics and unique looks of different cars, when it hit me.</p>
-        <blockquote class="quote">"What if I tried out car photography?"</blockquote>
-        <p>So, in 2025, I made the switch getting to collaborate with my local Porsche and Genesis dealerships, and continuing to push the limits of what automotive imagery could look like.</p>
-        <a href="book/" class="cta-link">
-          Book a session
-          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
+    </section>
+  </div>
+</div>
+<!-- Instagram Section
+<div class="wrap">
+  <section class="insta-section">
+    <div class="insta-header">
+      <div>
+        <p class="eyebrow">Follow Along</p>
+        <h2>Recent Work</h2>
       </div>
+      <a href="https://instagram.com/leiadakrozjhen" target="_blank" class="insta-follow-link">
+        @leiadakrozjhen
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <div class="insta-grid">
+      <a href="https://www.instagram.com/p/DaeJxP_FOpw/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="insta-tile" aria-label="View on Instagram">
+        <img src="https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf1581-ooZPPNBwoeQjv7Lw.webp" alt="BMW iX3" loading="lazy">
+        <div class="insta-tile-overlay"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg></div>
+      </a>
+      <a href="https://www.instagram.com/p/DaeHaMLlKXn/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="insta-tile" aria-label="View on Instagram">
+        <img src="https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf0781-ReJvfwx0lzD9H8K5.webp" alt="BMW X7" loading="lazy">
+        <div class="insta-tile-overlay"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg></div>
+      </a>
+      <a href="https://instagram.com/leiadakrozjhen" target="_blank" class="insta-tile" aria-label="View on Instagram">
+        <img src="https://assets.zyrosite.com/Jt4lDSQe2RLluQD3/_dsf1764-FbJvI6um9FjYGtEy.webp" alt="2026 Corvette E-Ray" loading="lazy">
+        <div class="insta-tile-overlay"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg></div>
+      </a>
+      <a href="https://instagram.com/leiadakrozjhen" target="_blank" class="insta-tile" aria-label="View on Instagram">
+        <img src="https://assets.zyrosite.com/Jt4lDSQe2RLluQD3/_dsf3257-MjrKsZXbI34Kf9Eh.webp" alt="Subaru WRX" loading="lazy">
+        <div class="insta-tile-overlay"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg></div>
+      </a>
+      <a href="https://instagram.com/leiadakrozjhen" target="_blank" class="insta-tile" aria-label="View on Instagram">
+        <img src="https://assets.zyrosite.com/Jt4lDSQe2RLluQD3/_dsf0249-AOsW5IrFveW1lY8N.jpg" alt="Lexus LC500" loading="lazy">
+        <div class="insta-tile-overlay"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg></div>
+      </a>
+      <a href="https://instagram.com/leiadakrozjhen" target="_blank" class="insta-tile" aria-label="View on Instagram">
+        <img src="https://assets.zyrosite.com/Jt4lDSQe2RLluQD3/_dsf5581-1-i2Ft9tJYShu4Ym5A.webp" alt="Black Behind Bars Exhibition" loading="lazy">
+        <div class="insta-tile-overlay"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg></div>
+      </a>
     </div>
   </section>
-</div>
+</div>-->
 <footer>
   <div class="footer-wrap">
     <div class="footer-brand reveal">
@@ -111,7 +178,7 @@
         <ul class="footer-nav">
           <li><a href="./">Work</a></li>
           <li><a href="book/">Book Me</a></li>
-          <li><a href="prints/">Prints</a></li>
+          <!-- <li><a href="prints/">Prints</a></li> -->
           <li><a href="blog/">Blog</a></li>
           <li><a href="contact/">Contact</a></li>
         </ul>
