@@ -9,23 +9,30 @@
 })();
 
 /* ── ANNOUNCEMENT BAR ───────────────────────────────────────── */
-(function () {
-  if (localStorage.getItem('lk-announce-dismissed') === 'true') {
-    document.documentElement.style.setProperty('--announce-h', '0px');
-  }
-})();
+/* Edit this list to change the announcement strip site-wide — every
+   page pulls from here, so it only ever needs to be changed once.
+   Add more than one string and they'll rotate automatically. */
+const announcements = [
+  "Now booking Fall 2026 sessions — inquire early, dates fill fast.",
+];
+
 function initAnnounceBar() {
-  const bar = document.getElementById('announceBar');
-  const closeBtn = document.getElementById('announceClose');
-  if (!bar || !closeBtn) return;
-  if (localStorage.getItem('lk-announce-dismissed') === 'true') {
-    bar.style.display = 'none';
+  const textEl = document.getElementById('announceText');
+  if (!textEl || !announcements.length) return;
+
+  let i = 0;
+  textEl.textContent = announcements[0];
+
+  if (announcements.length > 1) {
+    setInterval(() => {
+      i = (i + 1) % announcements.length;
+      textEl.style.opacity = '0';
+      setTimeout(() => {
+        textEl.textContent = announcements[i];
+        textEl.style.opacity = '1';
+      }, 400);
+    }, 6000);
   }
-  closeBtn.addEventListener('click', () => {
-    document.documentElement.style.setProperty('--announce-h', '0px');
-    bar.style.display = 'none';
-    localStorage.setItem('lk-announce-dismissed', 'true');
-  });
 }
 function applyTheme(t) {
   document.documentElement.setAttribute('data-theme', t);
@@ -791,6 +798,18 @@ function initBookingForm() {
       ];
     }
 
+    const goalsBlock = currentClientType === 'dealer'
+      ? [
+          `GOALS`,
+          `Goals:          ${g('bf-dealer-goals') || 'None'}`,
+          `Primary use:    ${chk('bf-dealer-deliverables') || 'Not specified'}`,
+        ]
+      : [
+          `GOALS`,
+          `Goals:         ${g('bf-goals') || 'None'}`,
+          `Deliverables:  ${chk('bf-deliverables') || 'Not specified'}`,
+        ];
+
     const message = [
       `BOOKING REQUEST — ${pkg}`,
       `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
@@ -814,9 +833,7 @@ function initBookingForm() {
       `Vision:  ${g('bf-vision') || 'None'}`,
       `Style:   ${chk('bf-style') || 'Not specified'}`,
       ``,
-      `GOALS`,
-      `Goals:         ${g('bf-goals') || 'None'}`,
-      `Deliverables:  ${chk('bf-deliverables') || 'Not specified'}`,
+      ...goalsBlock,
       ``,
       `OTHER`,
       `Prior experience:  ${g('bf-experience') || 'Not specified'}`,
