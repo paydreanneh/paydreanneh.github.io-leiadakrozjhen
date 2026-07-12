@@ -10,8 +10,7 @@
 <link rel="icon" type="image/x-icon" href="https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/apple-touch-icon-ADNHfY6c3biWe2EO.png">
 </head>
 <body><div class="announce-bar" id="announceBar">
-  <p>More projects dropping soon...</p>
-  <button class="announce-close" id="announceClose" aria-label="Dismiss announcement">&times;</button>
+  <p id="announceText"></p>
 </div>
 <nav id="mainNav">
   <div class="nav-inner">
@@ -66,8 +65,8 @@
 
   <div class="client-selector">
     <button class="client-btn active" onclick="selectClient('owner',this)">Private Owner</button>
-    <button class="client-btn" onclick="selectClient('dealer',this)">Dealership</button>
     <button class="client-btn" onclick="selectClient('multi',this)">Multi-Car / Bike Session</button>
+    <button class="client-btn" onclick="selectClient('dealer',this)">Dealership</button>
   </div>
 
   <!-- PRIVATE OWNER -->
@@ -123,60 +122,63 @@
 
   <!-- DEALERSHIP -->
   <div class="packages-wrap" id="pkg-dealer">
-    <div class="retainer-note">
-      <p>Dealership pricing is structured as a <strong>monthly retainer</strong> — not per session. Your plan is based on the number of vehicles and images per vehicle you need each month.</p>
+    <div class="retainer-note reveal">
+      <h3>Dealership Photography Retainers</h3>
+      <p>Monthly retainers give your dealership predictable, high-quality visual content tailored to your inventory size, brand tier, and sales goals. Every plan includes consistent styling, professional editing, and fast delivery — with pricing adjusted to your exact monthly volume.</p>
     </div>
     <div class="packages-grid">
-      <div class="pkg-card">
-        <p class="pkg-tier">Retainer · Tier I</p>
+      <div class="pkg-card reveal">
+        <p class="pkg-tier">Tier I</p>
         <h3 class="pkg-name">Lot Presence</h3>
-        <p class="pkg-price">$1,500 <span>/ month</span></p>
-        <p class="pkg-tagline">Consistent, polished inventory imagery for smaller lots that need to stand out online.</p>
+        <p class="pkg-price">Starting at $1,500 <span>/ month</span></p>
+        <p class="pkg-tagline">For smaller lots needing consistent, polished inventory imagery that stands out online.</p>
         <ul class="pkg-features">
           <li>Up to 10 vehicles per month</li>
           <li>12 edited images per vehicle</li>
           <li>Clean, consistent inventory style</li>
-          <li>Delivery within 3 business days per batch</li>
+          <li>Delivery within 3 business days</li>
           <li>Full dealership commercial license</li>
           <li>Priority scheduling within your service area</li>
         </ul>
-        <button class="pkg-btn" onclick="openBookingForm('dealer','Lot Presence Retainer — $1,500/mo')">Select Plan</button>
+        <button class="pkg-btn" aria-label="Request a custom quote for Tier I — Lot Presence" onclick="openBookingForm('dealer','Tier I — Lot Presence — Custom Quote Request')">Request Custom Quote</button>
       </div>
-      <div class="pkg-card featured">
-        <div class="pkg-badge">Best Value</div>
-        <p class="pkg-tier">Retainer · Tier II</p>
+      <div class="pkg-card featured reveal">
+        <div class="pkg-badge">Most Popular</div>
+        <p class="pkg-tier">Tier II</p>
         <h3 class="pkg-name">Flagship</h3>
-        <p class="pkg-price">$5,000 <span>/ month</span></p>
-        <p class="pkg-tagline">Elevated monthly content for mid-size dealerships with marquee vehicles to highlight.</p>
+        <p class="pkg-price">Starting at $5,000 <span>/ month</span></p>
+        <p class="pkg-tagline">For mid-size dealerships with marquee vehicles and ongoing monthly content needs.</p>
         <ul class="pkg-features">
           <li>Up to 20 vehicles per month</li>
           <li>20 edited images per vehicle</li>
           <li>Includes up to 4 hero/feature-vehicle shoots</li>
           <li>Social-ready vertical crops included</li>
-          <li>Delivery within 2 business days per batch</li>
+          <li>Delivery within 2 business days</li>
           <li>Full commercial license + usage rights</li>
           <li>Monthly content strategy call</li>
         </ul>
-        <button class="pkg-btn" onclick="openBookingForm('dealer','Flagship Retainer — $5,000/mo')">Select Plan</button>
+        <button class="pkg-btn" aria-label="Request a custom quote for Tier II — Flagship" onclick="openBookingForm('dealer','Tier II — Flagship — Custom Quote Request')">Request Custom Quote</button>
       </div>
-      <div class="pkg-card">
-        <p class="pkg-tier">Retainer · Tier III</p>
+      <div class="pkg-card reveal">
+        <p class="pkg-tier">Tier III</p>
         <h3 class="pkg-name">Brand Authority</h3>
-        <p class="pkg-price">$8,000 <span>/ month</span></p>
-        <p class="pkg-tagline">Full-scale visual brand management for high-volume or luxury dealerships.</p>
+        <p class="pkg-price">Starting at $10,000 <span>/ month</span></p>
+        <p class="pkg-tagline">Full-scale visual brand management with unlimited creative support.</p>
         <ul class="pkg-features">
           <li>Up to 40 vehicles per month</li>
           <li>30+ images per vehicle</li>
-          <li>Unlimited hero shoots included</li>
+          <li>Unlimited hero shoots</li>
           <li>Same-week turnaround</li>
           <li>Unlimited commercial + print use</li>
           <li>Dedicated content planning &amp; scheduling</li>
         </ul>
-        <button class="pkg-btn" onclick="openBookingForm('dealer','Brand Authority Retainer — $8,000/mo')">Select Plan</button>
+        <button class="pkg-btn" aria-label="Request a custom quote for Tier III — Brand Authority" onclick="openBookingForm('dealer','Tier III — Brand Authority — Custom Quote Request')">Request Custom Quote</button>
       </div>
     </div>
-    <div class="retainer-note" style="margin-top:0;margin-bottom:2.5rem">
-      <p>Need a custom volume? <strong>Reach out directly</strong> and we'll build a plan around your exact inventory and content goals.</p>
+    <div class="dealer-custom-cta reveal" style="margin-bottom:2.5rem">
+      <h3>Custom Volume Plans</h3>
+      <p>If your dealership needs more vehicles, more content, or a unique monthly structure, I'll build a retainer around your exact inventory and marketing goals.</p>
+      <button class="pkg-btn" aria-label="Start building your custom dealership plan" onclick="openBookingForm('dealer','Custom Volume Plan Request')">Start Your Custom Plan</button>
     </div>
   </div>
 
@@ -481,22 +483,45 @@
 
       <!-- SECTION 6: GOALS -->
       <p class="form-section-label">Your Goals</p>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="bf-goals">What are your goals for this shoot?</label>
-          <textarea id="bf-goals" style="min-height:90px" placeholder="e.g. Selling the car, growing my Instagram, creating memories, entering a car show, brand content for my page…"></textarea>
+      <div data-for-client="owner multi">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="bf-goals">What are your goals for this shoot?</label>
+            <textarea id="bf-goals" style="min-height:90px" placeholder="e.g. Selling the car, growing my Instagram, creating memories, entering a car show, brand content for my page…"></textarea>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>What do you want to do with these photos?</label>
+            <div class="pill-group">
+              <label class="pill-label"><input type="checkbox" name="bf-deliverables" value="Social media content"><span>Social media</span></label>
+              <label class="pill-label"><input type="checkbox" name="bf-deliverables" value="Sell the vehicle"><span>Sell the vehicle</span></label>
+              <label class="pill-label"><input type="checkbox" name="bf-deliverables" value="Personal wall prints"><span>Wall prints</span></label>
+              <label class="pill-label"><input type="checkbox" name="bf-deliverables" value="Car show / event submission"><span>Car show / event</span></label>
+              <label class="pill-label"><input type="checkbox" name="bf-deliverables" value="Magazine / media feature"><span>Magazine / media</span></label>
+              <label class="pill-label"><input type="checkbox" name="bf-deliverables" value="Brand / sponsor content"><span>Brand / sponsor</span></label>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>What do you want to do with these photos?</label>
-          <div class="pill-group">
-            <label class="pill-label"><input type="checkbox" name="bf-deliverables" value="Social media content"><span>Social media</span></label>
-            <label class="pill-label"><input type="checkbox" name="bf-deliverables" value="Sell the vehicle"><span>Sell the vehicle</span></label>
-            <label class="pill-label"><input type="checkbox" name="bf-deliverables" value="Personal wall prints"><span>Wall prints</span></label>
-            <label class="pill-label"><input type="checkbox" name="bf-deliverables" value="Car show / event submission"><span>Car show / event</span></label>
-            <label class="pill-label"><input type="checkbox" name="bf-deliverables" value="Magazine / media feature"><span>Magazine / media</span></label>
-            <label class="pill-label"><input type="checkbox" name="bf-deliverables" value="Brand / sponsor content"><span>Brand / sponsor</span></label>
+      <div data-for-client="dealer">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="bf-dealer-goals">What are your goals for this content?</label>
+            <textarea id="bf-dealer-goals" style="min-height:90px" placeholder="e.g. Refreshing website listing photos, building a consistent social presence, campaign content for a model launch, showroom displays…"></textarea>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Where will this content primarily be used?</label>
+            <div class="pill-group">
+              <label class="pill-label"><input type="checkbox" name="bf-dealer-deliverables" value="Website / online listings"><span>Website / listings</span></label>
+              <label class="pill-label"><input type="checkbox" name="bf-dealer-deliverables" value="Social media &amp; digital ads"><span>Social &amp; digital ads</span></label>
+              <label class="pill-label"><input type="checkbox" name="bf-dealer-deliverables" value="Showroom / in-store displays"><span>Showroom displays</span></label>
+              <label class="pill-label"><input type="checkbox" name="bf-dealer-deliverables" value="Print &amp; signage"><span>Print &amp; signage</span></label>
+              <label class="pill-label"><input type="checkbox" name="bf-dealer-deliverables" value="Sales team / CRM materials"><span>Sales / CRM materials</span></label>
+              <label class="pill-label"><input type="checkbox" name="bf-dealer-deliverables" value="Brand / marketing campaign"><span>Marketing campaign</span></label>
+            </div>
           </div>
         </div>
       </div>
