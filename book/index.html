@@ -71,6 +71,11 @@
 
   <!-- PRIVATE OWNER -->
   <div class="packages-wrap active" id="pkg-owner">
+    <div class="retainer-note reveal">
+      <h3>Your Build Deserves More Than a Snapshot</h3>
+      <p class="note-full-text">You've put in the hours, the money, and the pride that most people scrolling past will never see. A phone photo just documents the car — it doesn't do the build justice. My work is built to do the opposite: stop someone mid-scroll and make the effort behind your car finally visible. Every session is priced transparently upfront, no guesswork, no surprise add-ons, just editorial-level images built to get your car the attention it's earned.</p>
+      <p class="note-mobile-text">A phone photo just documents the car. My work makes strangers stop and actually see it, priced transparently, no surprises.</p>
+    </div>
     <div class="packages-grid">
       <div class="pkg-card">
         <p class="pkg-tier">Tier I</p>
@@ -123,8 +128,9 @@
   <!-- DEALERSHIP -->
   <div class="packages-wrap" id="pkg-dealer">
     <div class="retainer-note reveal">
-      <h3>Dealership Photography Retainers</h3>
-      <p>Monthly retainers give your dealership predictable, high-quality visual content tailored to your inventory size, brand tier, and sales goals. Every plan includes consistent styling, professional editing, and fast delivery — with pricing adjusted to your exact monthly volume.</p>
+      <h3>Beyond the Lot</h3>
+      <p class="note-full-text">Manufacturer-supplied marketing images are the same shot handed to every dealership nationwide selling that model, not the actual vehicle on your lot, not your location, nothing that separates you from the dealership down the road selling the same badge. Every plan below covers real inventory, shot and styled consistently, plus the option to go beyond standard listing photos with off-lot editorial sessions that put a spotlight on your dealership specifically. Pricing is adjusted to your exact monthly volume.</p>
+      <p class="note-mobile-text">Manufacturer photos look the same at every dealership. Every plan covers your real inventory, plus off-lot sessions that spotlight your dealership specifically.</p>
     </div>
     <div class="packages-grid">
       <div class="pkg-card reveal">
@@ -244,6 +250,7 @@
       <p class="form-sub">You've selected:</p>
       <span class="form-pkg-label" id="formPackageLabel">Package</span>
 
+      <div class="form-step" data-step="1">
       <!-- SECTION 1: YOUR DETAILS -->
       <p class="form-section-label">Your Details</p>
       <div class="form-row two">
@@ -259,6 +266,9 @@
           <span class="field-error" id="berr-lname"></span>
         </div>
       </div>
+      </div>
+      <div class="form-step" data-step="2">
+      <p class="form-section-label form-step-only-label">How Can I Reach You?</p>
       <div class="form-row two">
         <div class="form-group">
           <label for="bf-email">Email *</label>
@@ -271,6 +281,8 @@
         </div>
       </div>
 
+      </div>
+      <div class="form-step" data-step="3">
       <!-- SECTION 2: YOUR VEHICLE (client-specific) -->
 
       <!-- PRIVATE OWNER: single vehicle -->
@@ -394,6 +406,8 @@
         </div>
       </div>
 
+      </div>
+      <div class="form-step" data-step="4">
       <p class="form-section-label">Preferred Date &amp; Time</p>
       <div class="avail-schedule">
         <p class="avail-title">My availability</p>
@@ -439,6 +453,8 @@
         </div>
       </div>
 
+      </div>
+      <div class="form-step" data-step="5">
       <!-- SECTION 4: LOCATION -->
       <p class="form-section-label">Location</p>
       <div class="form-row">
@@ -458,6 +474,8 @@
         </div>
       </div>
 
+      </div>
+      <div class="form-step" data-step="6">
       <!-- SECTION 5: CREATIVE VISION -->
       <p class="form-section-label">Your Vision</p>
       <div class="form-row">
@@ -481,6 +499,8 @@
         </div>
       </div>
 
+      </div>
+      <div class="form-step" data-step="7">
       <!-- SECTION 6: GOALS -->
       <p class="form-section-label">Your Goals</p>
       <div data-for-client="owner multi">
@@ -526,6 +546,8 @@
         </div>
       </div>
 
+      </div>
+      <div class="form-step" data-step="8">
       <!-- SECTION 7: EXPERIENCE & BUDGET -->
       <p class="form-section-label">A Few More Things</p>
       <div class="form-row" data-for-client="owner multi">
@@ -564,8 +586,20 @@
         </div>
       </div>
 
+      </div>
+      <div class="form-step" data-step="9">
+      <p class="form-section-label form-step-only-label">Ready to Send?</p>
       <button class="form-submit" id="bookingSubmitBtn" type="button">Send Booking Request</button>
       <p class="form-note">I'll respond within 24–48 hours to confirm details and next steps.</p>
+      </div>
+
+      <div class="form-step-nav" id="formStepNav">
+        <button type="button" id="formStepBack" class="form-step-btn form-step-back">Back</button>
+        <div class="form-step-progress" id="formStepProgress">
+          <div class="form-step-progress-fill" id="formStepProgressFill"></div>
+        </div>
+        <button type="button" id="formStepNext" class="form-step-btn form-step-next">Next</button>
+      </div>
     </div>
 
     <!-- SUCCESS STATE -->
