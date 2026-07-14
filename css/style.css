@@ -631,6 +631,28 @@ nav.scrolled { box-shadow: 0 2px 24px var(--shadow); }
 }
 .brands-inner img:hover { opacity: 1; transform: scale(1.05); }
 
+/* Mobile-only infinite logo marquee — hidden on tablet/desktop */
+.brands-marquee { display: none; }
+.brands-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: brandsMarquee 16s linear infinite;
+}
+.brands-track img {
+  height: 34px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
+  margin: 0 1.6rem;
+  flex-shrink: 0;
+}
+@keyframes brandsMarquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
 /* ============================================================
    RECENT WORK (Instagram-style strip)
    ============================================================ */
@@ -817,6 +839,104 @@ nav.scrolled { box-shadow: 0 2px 24px var(--shadow); }
   transition: transform 0.25s;
 }
 .cta-link:hover svg { transform: translateX(3px); }
+
+/* ============================================================
+   AUDIENCE PITCH SECTIONS (home) — Owners / Dealerships / Brand Campaigns
+   ============================================================ */
+.audience-scroll-wrap { display: block; }
+.audience-pitch-section { position: relative; padding: 3.5rem 0; }
+.audience-pitch-section::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  z-index: -1;
+}
+.audience-pitch-section:nth-child(2)::before { background: var(--bg-alt); }
+.audience-pitch-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+.audience-pitch-grid.reverse { grid-template-columns: 0.95fr 1.05fr; }
+.audience-pitch-grid.reverse .audience-pitch-text { order: 2; }
+.audience-pitch-grid.reverse .audience-pitch-media { order: 1; }
+
+.audience-pitch-text .eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--crimson);
+  margin-bottom: 0.85rem;
+  display: block;
+}
+.audience-pitch-text h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(2rem, 3.2vw, 2.7rem);
+  line-height: 1.15;
+  margin-bottom: 1.3rem;
+  color: var(--text);
+}
+.audience-pitch-text p {
+  font-size: 0.96rem;
+  line-height: 1.82;
+  color: var(--text-body);
+  margin-bottom: 1rem;
+}
+.audience-mobile-text { display: none; }
+.audience-pitch-media {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+  aspect-ratio: 3/2;
+  width: 100%;
+}
+.audience-pitch-media img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.proof-row {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+  margin: 1.8rem 0 1.6rem;
+  padding: 1.4rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.proof-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.proof-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: 1.4rem;
+  color: var(--crimson);
+}
+.proof-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.proof-divider {
+  width: 1px;
+  height: 42px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+.audience-pitch-text .cta-link { margin-top: 0; }
+
+/* Mobile-only swipe affordance for the audience card row */
+.swipe-hint { display: none; }
+.scroll-dots { display: none; }
 
 /* ============================================================
    FOOTER
@@ -1163,6 +1283,7 @@ footer {
   margin-bottom: 0.6rem;
 }
 .retainer-note p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.75; }
+.note-mobile-text { display: none; }
 .retainer-note strong { color: var(--crimson); font-weight: 500; }
 
 /* Custom Volume Plans callout */
@@ -1365,6 +1486,11 @@ footer {
   margin-top: 0.75rem;
   letter-spacing: 0.04em;
 }
+
+/* ── Mobile step wizard — inert on desktop/tablet ────────────── */
+.form-step { display: block; }
+.form-step-only-label { display: none; }
+.form-step-nav { display: none; }
 
 /* Booking success */
 .booking-success {
@@ -1994,11 +2120,32 @@ footer {
   .blog-featured-img { aspect-ratio: 16/9; }
   .blog-featured-text { padding: 1.5rem; }
 
-  .blog-grid, .blog-grid--three { grid-template-columns: 1fr; }
-  .blog-card--landscape { flex-direction: column; }
-  .blog-card--landscape .blog-card-img { min-height: auto; aspect-ratio: 16/9; }
-  .blog-grid--three .blog-card--sm:last-child { flex-direction: column; }
-  .blog-grid--three .blog-card--sm:last-child .blog-card-img--sm { min-height: auto; aspect-ratio: 4/3; }
+  /* Blog cards — left-to-right swipe on mobile instead of a long vertical stack */
+  .blog-grid, .blog-grid--three {
+    display: flex;
+    flex-wrap: nowrap;
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 1rem;
+    padding-bottom: 4px;
+  }
+  .blog-grid::-webkit-scrollbar, .blog-grid--three::-webkit-scrollbar { display: none; }
+  .blog-card {
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+  }
+  .blog-card--landscape,
+  .blog-grid--three .blog-card--sm:last-child {
+    flex-direction: column;
+  }
+  .blog-card--landscape .blog-card-img,
+  .blog-grid--three .blog-card--sm:last-child .blog-card-img--sm {
+    min-height: auto;
+    aspect-ratio: 16/9;
+  }
 
   .blog-quote-band { padding: 2.5rem 0; }
   .blog-newsletter { padding: 1.8rem 1.2rem; gap: 2rem; }
@@ -2347,6 +2494,9 @@ footer {
 
   .insta-grid { grid-template-columns: repeat(3, 1fr); }
 
+  .audience-pitch-grid,
+  .audience-pitch-grid.reverse { gap: 2.25rem; }
+
   .about-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
   .about-photo-placeholder { aspect-ratio: 4/5; }
   .about-text h2 { font-size: 1.9rem; }
@@ -2398,13 +2548,24 @@ footer {
   .nav-burger { display: flex; }
   .mobile-menu { display: block; }
 
-  .home-hero { padding: calc(var(--topbar-h) + 2rem) 0 2.5rem; }
-  .home-hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .home-hero { padding: calc(var(--topbar-h) + 1.25rem) 0 3.25rem; }
+  .home-hero-inner { grid-template-columns: 1fr; gap: 1.75rem; }
+  .home-hero-text { text-align: center; order: 2; }
   .home-hero-text h1 { font-size: clamp(1.95rem, 8vw, 2.6rem); }
-  .home-hero-cta { gap: 0.7rem; margin-top: 1.7rem; }
-  .hero-btn { flex: 1 1 auto; padding: 0.8rem 1.2rem; font-size: 0.72rem; }
-  .home-hero-media { max-width: 100%; aspect-ratio: 16/10; order: 2; }
-  .gallery-scroll-wrap { margin-top: 3rem; }
+  .home-hero-cta {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 320px;
+    margin: 2rem auto 0;
+    gap: 0.7rem;
+  }
+  .hero-btn { padding: 0.85rem 1.2rem; font-size: 0.72rem; }
+  .home-hero-media { max-width: 100%; aspect-ratio: 16/10; order: 1; }
+  .gallery-scroll-wrap { margin-top: 4rem; }
+
+  .brands-strip { padding: 1.6rem 0; }
+  .brands-inner { display: none; }
+  .brands-marquee { display: block; overflow: hidden; width: 100%; }
 
   /* Home gallery: left-to-right swipe row instead of vertical stacking */
   .gallery-grid.mobile-scroll { display: flex; }
@@ -2414,14 +2575,161 @@ footer {
   .insta-header { align-items: flex-start; }
   .insta-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
 
-  .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  /* Owners / Dealerships / Brand Campaigns — left-to-right swipe on mobile */
+  .swipe-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+  .swipe-hint svg {
+    width: 14px; height: 14px;
+    stroke: var(--crimson);
+    fill: none;
+    stroke-width: 2;
+    animation: swipeNudge 1.6s ease-in-out infinite;
+  }
+  @keyframes swipeNudge {
+    0%, 100% { transform: translateX(0); opacity: 0.6; }
+    50% { transform: translateX(5px); opacity: 1; }
+  }
+  .scroll-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+  }
+  .scroll-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--border-accent);
+    transition: background 0.25s, transform 0.25s;
+  }
+  .scroll-dot.active { background: var(--crimson); transform: scale(1.3); }
+
+  .audience-scroll-wrap {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 1rem;
+    margin-top: 3rem;
+    padding-bottom: 4px;
+  }
+  .audience-scroll-wrap::-webkit-scrollbar { display: none; }
+  .audience-pitch-section {
+    flex: 0 0 84%;
+    scroll-snap-align: start;
+    padding: 2rem 1.4rem;
+    background: var(--bg-alt);
+    border-radius: 3px;
+  }
+  .audience-pitch-section::before { display: none; }
+  .audience-pitch-grid,
+  .audience-pitch-grid.reverse { grid-template-columns: 1fr; gap: 1.5rem; }
+  .audience-pitch-grid.reverse .audience-pitch-text,
+  .audience-pitch-grid.reverse .audience-pitch-media { order: initial; }
+  .audience-pitch-media { aspect-ratio: 16/10; }
+  .audience-full-text { display: none; }
+  .audience-mobile-text { display: block; font-size: 0.92rem; line-height: 1.7; }
+  .proof-row { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .proof-divider { display: none; }
+
+  .about-grid { grid-template-columns: 1fr; gap: 2.75rem; }
   .about-photo-placeholder { aspect-ratio: 16/9; max-height: 280px; }
 
-  .packages-grid,
   .prints-grid { grid-template-columns: 1fr; }
+
+  /* Book Me pricing cards — left-to-right swipe on mobile */
+  .packages-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 1rem;
+    padding-bottom: 4px;
+  }
+  .packages-grid::-webkit-scrollbar { display: none; }
+  .pkg-card { flex: 0 0 84%; scroll-snap-align: start; }
+  .note-full-text { display: none; }
+  .note-mobile-text { display: block; }
 
   .form-row.two,
   .form-row.three { grid-template-columns: 1fr; }
+
+  /* ── Booking form: one question at a time on mobile ─────────── */
+  .booking-form-inner { padding-bottom: 5.5rem; }
+  .form-step-only-label { display: block; }
+  .form-step {
+    display: none;
+    animation: stepFadeIn 0.3s ease;
+  }
+  .form-step.active { display: block; }
+  @keyframes stepFadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .form-step-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 900;
+    padding: 0.9rem 5%;
+    background: var(--nav-bg);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-top: 1px solid var(--border);
+  }
+  .form-step-btn {
+    flex-shrink: 0;
+    padding: 0.7rem 1.1rem;
+    border-radius: 2px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, opacity 0.2s;
+  }
+  .form-step-back {
+    background: none;
+    border: 1px solid var(--border-accent);
+    color: var(--text-muted);
+  }
+  .form-step-back:disabled { opacity: 0.35; cursor: not-allowed; }
+  .form-step-next {
+    flex: 1;
+    background: var(--crimson);
+    border: none;
+    color: #fff;
+  }
+  .form-step-next:hover { background: var(--crimson-dark); }
+  .form-step-progress {
+    flex: 1;
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .form-step-progress-fill {
+    height: 100%;
+    background: var(--crimson);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+    width: 11%;
+  }
 
   .client-selector {
     flex-direction: column;
@@ -2433,7 +2741,7 @@ footer {
   }
   .client-btn:last-child { border-bottom: none; }
 
-  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
 
   .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .page-hero { text-align: left; }
@@ -2463,8 +2771,8 @@ footer {
 
   .footer-bottom { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
 
-  .brands-inner { gap: 1.5rem; }
-  .brands-inner img { height: 54px; }
+  .brands-track { animation-duration: 13s; }
+  .brands-track img { height: 28px; margin: 0 1.2rem; }
 }
 
 @media (max-width: 400px) {
