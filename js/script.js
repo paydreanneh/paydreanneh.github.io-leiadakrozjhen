@@ -46,9 +46,10 @@ function toggleTheme() {
 const galleryItems = [
   // Commented out per Paydreanne + Jax review — weakest work on the home page. Kept here, not deleted, in case any get swapped back in later.
   // { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf9444-mKww4Zq7y434RsMp.webp', model: 'Lexus IS F Sport', detail: '@hendricklexusnorthlake', slug: 'lexus-is-f-sport' },
-  { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf4663-54xghVWYFGEtuhzj.webp', model: 'BMW iX3', detail: 'Octagon Marketing x BMW', slug: 'bmw-ix3' },
   { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf6785-experimental-TvBW0jlkVcQHiKzH.webp', model: 'Dodge Challenger SRT8', detail: 'Mr. Alberta at Streetside Classics', slug: 'dodge-challenger-srt8' },
-  { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf9355-25bQ9y32bXFCL2Fl.webp', model: 'Acura Integra Type S', detail: '@charlottemotorspeedway', slug: 'acura-integra-type-s' },
+    { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf6500-Ts6Zh68eMMBnYlly.webp', model: 'Lexus IS 350', detail: '@hungis350', slug: 'lexus-is350' },
+  // { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf9355-25bQ9y32bXFCL2Fl.webp', model: 'Acura Integra Type S', detail: '@charlottemotorspeedway', slug: 'acura-integra-type-s' },
+  { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf4663-54xghVWYFGEtuhzj.webp', model: 'BMW iX3', detail: 'Octagon Marketing x BMW', slug: 'bmw-ix3' },
   // { src: 'https://assets.zyrosite.com/Jt4lDSQe2RLluQD3/_dsf8480-GVkbqDnernn7OdMM.webp', model: 'Ford Mustang', detail: '@sky5oh', slug: 'ford-mustang' },
   // { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf6832-7HmGZG1VeOLH5FKI.webp', model: 'Volkswagen Jetta SE', detail: '@leiadakrozjhen', slug: 'volkswagen-jetta-se' },
   { src: 'https://assets.zyrosite.com/Jt4lDSQe2RLluQD3/_dsf2254-ibThNyvEAcCqIl20.webp', model: 'Ford Mustang Duo', detail: '@gt5.0jose', slug: 'ford-mustang-duo' },
@@ -58,7 +59,6 @@ const galleryItems = [
   { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf7085-1-ggDTPNAiSH6wTaZx.webp', model: 'BMW G80 M3 6MT', detail: '@iomg_m3_6mt', slug: 'bmw-g80-m3-6mt' },
   { src: 'https://assets.zyrosite.com/Jt4lDSQe2RLluQD3/_dsf3257-MjrKsZXbI34Kf9Eh.webp', model: 'Subaru WRX', detail: '@wiichee', slug: 'subaru-wrx' },
   { src: 'https://assets.zyrosite.com/Jt4lDSQe2RLluQD3/_dsf2221-Cuj8yliVJc9e9VwD.webp', model: 'Porsche Panamera 4S', detail: '@acjphoto', slug: 'porsche-panamera-4s' },
-  { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf6500-Ts6Zh68eMMBnYlly.webp', model: 'Lexus IS 350', detail: '@hungis350', slug: 'lexus-is350' },
   { src: 'https://assets.zyrosite.com/Jt4lDSQe2RLluQD3/_dsf5581-1-i2Ft9tJYShu4Ym5A.webp', model: 'Black Behind Bars Exhibition', detail: '@acjphoto × @independenceharleydavidson', slug: 'harley-exhibition' },
   // { src: 'https://assets.zyrosite.com/Jt4lDSQe2RLluQD3/_dsf2430-8iQWTpAylngBjKpb.webp', model: 'Genesis G70', detail: '@mcrossmedia', slug: 'genesis-g70' },
   // { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf4023-2KHB2aVhUdudVWKF.webp', model: 'Project Tohru', detail: '@leiadakrozjhen', slug: 'project-tohru' },
