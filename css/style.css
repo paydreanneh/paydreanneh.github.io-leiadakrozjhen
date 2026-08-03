@@ -457,25 +457,19 @@ nav.scrolled { box-shadow: 0 2px 24px var(--shadow); }
    ============================================================ */
 .gallery-scroll-wrap { margin-top: 5rem; }
 .gallery-grid {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
+  columns: 3;
+  column-gap: 10px;
   opacity: 0;
   transition: opacity 0.5s ease;
   padding-bottom: 5rem;
 }
 .gallery-grid.loaded { opacity: 1; }
 
-.gallery-column {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
 /* ── Mobile: left-to-right swipe row instead of a stacked column ── */
 .gallery-scroll-wrap { position: relative; }
 .gallery-grid.mobile-scroll {
+  display: flex;
+  columns: unset;
   flex-wrap: nowrap;
   overflow-x: auto;
   overflow-y: hidden;
@@ -483,6 +477,7 @@ nav.scrolled { box-shadow: 0 2px 24px var(--shadow); }
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   padding-bottom: 2px;
+  gap: 10px;
 }
 .gallery-grid.mobile-scroll::-webkit-scrollbar { display: none; }
 .gallery-grid.mobile-scroll .gallery-item {
@@ -533,7 +528,12 @@ nav.scrolled { box-shadow: 0 2px 24px var(--shadow); }
   transition: opacity 0.6s cubic-bezier(0.25,0.1,0.25,1),
               transform 0.6s cubic-bezier(0.25,0.1,0.25,1);
   outline: none;
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  margin-bottom: 10px;
+  display: inline-block;
 }
+.gallery-grid.mobile-scroll .gallery-item { margin-bottom: 0; }
 .gallery-item.visible {
   opacity: 1;
   transform: translateY(0) scale(1);
@@ -2490,7 +2490,7 @@ footer {
   .home-hero-media { aspect-ratio: 16/9; order: 2; }
 
   /* 2-col gallery on tablet */
-  .gallery-column:nth-child(3) { display: none; }
+  .gallery-grid { columns: 2; }
 
   .insta-grid { grid-template-columns: repeat(3, 1fr); }
 
@@ -2585,7 +2585,8 @@ footer {
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--text-muted);
-    margin-bottom: 1rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.25rem;
   }
   .swipe-hint svg {
     width: 14px; height: 14px;
@@ -2602,7 +2603,8 @@ footer {
     display: flex;
     justify-content: center;
     gap: 0.5rem;
-    margin-top: 1.2rem;
+    margin-top: 1.75rem;
+    margin-bottom: 2.5rem;
   }
   .scroll-dot {
     width: 6px; height: 6px;
