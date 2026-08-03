@@ -98,15 +98,9 @@ function buildGallery() {
     galleryItems.forEach(item => gallery.appendChild(makeGalleryItem(item)));
   } else {
     gallery.classList.remove('mobile-scroll');
-    const numCols = w <= 1024 ? 2 : 3;
-    const colDivs = [];
-    for (let i = 0; i < numCols; i++) {
-      const c = document.createElement('div');
-      c.className = 'gallery-column';
-      colDivs.push(c);
-      gallery.appendChild(c);
-    }
-    galleryItems.forEach((item, i) => colDivs[i % numCols].appendChild(makeGalleryItem(item)));
+    /* CSS multi-column layout auto-balances height across columns —
+       just append items in order, no manual column bucketing needed. */
+    galleryItems.forEach(item => gallery.appendChild(makeGalleryItem(item)));
   }
 
   requestAnimationFrame(() => {
@@ -1202,11 +1196,202 @@ function initBmwFX() {
   }
 }
 
+/* — Dodge Challenger SRT8: flickering indigo fireflies + warm dust/leaf/grass drift, blowing left → right — */
+function initChallengerFX() {
+  const wrap = document.getElementById('challengerFxWrap');
+  if (!wrap) return;
+  const back = setupFxCanvas(wrap, false);
+  const front = setupFxCanvas(wrap, true);
+
+  function makeGlowDots(n) {
+    const arr = [];
+    for (let i = 0; i < n; i++) {
+      arr.push({
+        x: Math.random() * 1.4 - 0.4,
+        y: 0.02 + Math.random() * 0.96,
+        r: 1.6 + Math.random() * 2.8,
+        speed: 0.02 + Math.random() * 0.028,        // slowed roughly in half
+        sway: 8 + Math.random() * 22,
+        phase: Math.random() * Math.PI * 2,
+        flickerPhase: Math.random() * Math.PI * 2,
+        flickerSpeed: 2.2 + Math.random() * 3.4,     // firefly pulse rate
+      });
+    }
+    return arr;
+  }
+  // Three debris silhouettes — round dust, tapered grass/twig blades, and
+  // small curved leaves (four leaf variants) — all in the same dark
+  // orange / dusty yellow palette.
+  function makeDebris(n) {
+    const arr = [];
+    const colors = ['#b45309', '#c2820f', '#ca9a1e', '#d4ad2a'];
+    for (let i = 0; i < n; i++) {
+      const roll = Math.random();
+      arr.push({
+        x: Math.random() * 1.4 - 0.4,
+        y: 0.02 + Math.random() * 0.96,
+        size: roll < 0.4 ? 1.3 + Math.random() * 2.2 : 3.8 + Math.random() * 3.6,
+        speed: 0.032 + Math.random() * 0.036,        // slowed roughly in half
+        sway: 5 + Math.random() * 14,
+        phase: Math.random() * Math.PI * 2,
+        rot: Math.random() * Math.PI * 2,
+        rotSpeed: (Math.random() - 0.5) * 0.5,
+        shape: roll < 0.4 ? 'dot' : roll < 0.7 ? 'wisp' : 'leaf',
+        bend: (Math.random() - 0.5) * 1.4,           // grass/twig curve amount
+        leafVariant: Math.floor(Math.random() * 4),  // 4 distinct leaf silhouettes
+        color: colors[i % colors.length],
+      });
+    }
+    return arr;
+  }
+
+  // Rebalanced for performance: glow dots use an expensive shadow-blur
+  // per particle, so that count stays modest. Debris (dust/leaves/grass)
+  // is cheap to draw, so that's where the "way more" volume lives.
+  const backGlow = makeGlowDots(30);
+  const frontGlow = makeGlowDots(22);
+  const backDebris = makeDebris(46);
+  const frontDebris = makeDebris(38);
+
+  function edgeFade(x) {
+    if (x < 0.1) return Math.max(0, x / 0.1);
+    if (x > 0.8) return Math.max(0, 1 - (x - 0.8) / 0.2);
+    return 1;
+  }
+
+  function drawGlow(ctx, dots, baseAlpha, alphaMul, w, h) {
+    dots.forEach(d => {
+      // Firefly-style flicker: squaring the sine keeps it dim most of the
+      // time with brighter, quicker pulses, less mechanical than a plain wave.
+      const pulse = Math.pow((Math.sin(d.flickerPhase) + 1) / 2, 2);
+      const flicker = 0.3 + 0.7 * pulse;
+      const a = baseAlpha * alphaMul * edgeFade(d.x) * flicker;
+      if (a <= 0.01) return;
+      const px = d.x * w;
+      const py = d.y * h + Math.sin(d.phase) * d.sway;
+      ctx.save();
+      ctx.globalAlpha = a;
+      ctx.shadowBlur = 9.5;
+      ctx.shadowColor = '#6366f1';
+      ctx.fillStyle = '#818cf8';
+      ctx.beginPath();
+      ctx.arc(px, py, d.r, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    });
+  }
+
+  // Tapered, gently curved blade — reads as a thin grass blade or twig
+  // fragment instead of a straight-edged rectangle. `bend` controls how
+  // much it arcs, so some come out nearly straight (twig-like) and
+  // others curve more (grass-like) from the same function.
+  function drawGrassBlade(ctx, size, bend) {
+    const len = size * 4.6;
+    const halfW = size * 0.42;
+    const tipDrop = bend * size * 1.6;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.quadraticCurveTo(len * 0.5, -halfW - tipDrop * 0.4, len, tipDrop);
+    ctx.quadraticCurveTo(len * 0.5, halfW - tipDrop * 0.4, 0, 0);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  // Four distinct leaf silhouettes for variety: a pointed almond leaf,
+  // a broader rounded leaf, a narrow willow-like leaf, and a small
+  // asymmetric notched leaf.
+  function drawLeaf0(ctx, size) {
+    ctx.beginPath();
+    ctx.moveTo(0, -size);
+    ctx.quadraticCurveTo(size * 0.8, -size * 0.3, 0, size);
+    ctx.quadraticCurveTo(-size * 0.8, -size * 0.3, 0, -size);
+    ctx.fill();
+  }
+  function drawLeaf1(ctx, size) {
+    ctx.beginPath();
+    ctx.moveTo(0, -size * 0.9);
+    ctx.quadraticCurveTo(size * 1.05, -size * 0.15, 0, size * 0.95);
+    ctx.quadraticCurveTo(-size * 1.05, -size * 0.15, 0, -size * 0.9);
+    ctx.fill();
+  }
+  function drawLeaf2(ctx, size) {
+    ctx.beginPath();
+    ctx.moveTo(0, -size * 1.15);
+    ctx.quadraticCurveTo(size * 0.42, 0, 0, size * 1.15);
+    ctx.quadraticCurveTo(-size * 0.42, 0, 0, -size * 1.15);
+    ctx.fill();
+  }
+  function drawLeaf3(ctx, size) {
+    ctx.beginPath();
+    ctx.moveTo(0, -size);
+    ctx.quadraticCurveTo(size * 0.85, -size * 0.35, size * 0.15, size * 0.1);
+    ctx.quadraticCurveTo(size * 0.75, size * 0.35, 0, size * 0.95);
+    ctx.quadraticCurveTo(-size * 0.8, size * 0.2, -size * 0.1, -size * 0.05);
+    ctx.quadraticCurveTo(-size * 0.7, -size * 0.4, 0, -size);
+    ctx.fill();
+  }
+  const leafDrawers = [drawLeaf0, drawLeaf1, drawLeaf2, drawLeaf3];
+
+  function drawDebris(ctx, bits, baseAlpha, alphaMul, w, h) {
+    bits.forEach(s => {
+      const a = baseAlpha * alphaMul * edgeFade(s.x);
+      if (a <= 0.01) return;
+      const px = s.x * w;
+      const py = s.y * h + Math.sin(s.phase) * s.sway;
+      ctx.save();
+      ctx.globalAlpha = a;
+      ctx.fillStyle = s.color;
+      if (s.shape === 'dot') {
+        ctx.beginPath();
+        ctx.arc(px, py, s.size, 0, Math.PI * 2);
+        ctx.fill();
+      } else if (s.shape === 'wisp') {
+        ctx.translate(px, py);
+        ctx.rotate(s.rot);
+        drawGrassBlade(ctx, s.size, s.bend);
+      } else {
+        ctx.translate(px, py);
+        ctx.rotate(s.rot);
+        leafDrawers[s.leafVariant](ctx, s.size);
+      }
+      ctx.restore();
+    });
+  }
+
+  function draw(ctxObj, glowSet, debrisSet, glowAlpha, debrisAlpha, dt) {
+    const { ctx, canvas } = ctxObj;
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    ctx.clearRect(0, 0, w, h);
+    const subtle = isLightboxOpen();
+    const alphaMul = subtle ? 0.35 : 1;
+    glowSet.forEach(d => {
+      d.x += d.speed * dt;
+      d.phase += dt * 0.8;
+      d.flickerPhase += d.flickerSpeed * dt + (Math.random() - 0.5) * 0.6 * dt;
+      if (d.x > 1.3) d.x = -0.3;
+    });
+    debrisSet.forEach(s => {
+      s.x += s.speed * dt;
+      s.phase += dt * 0.9;
+      s.rot += s.rotSpeed * dt;
+      if (s.x > 1.3) s.x = -0.3;
+    });
+    drawGlow(ctx, glowSet, glowAlpha, alphaMul, w, h);
+    drawDebris(ctx, debrisSet, debrisAlpha, alphaMul, w, h);
+  }
+
+  runFxLoop(wrap, dt => {
+    draw(back, backGlow, backDebris, 0.8, 0.4, dt);
+    draw(front, frontGlow, frontDebris, 0.88, 0.42, dt);
+  });
+}
+
 function initGalleryFX() {
   initLexusFX();
   initPorscheFX();
   initSubaruFX();
   initBmwFX();
+  initChallengerFX();
 }
 
 /* ── INIT ───────────────────────────────────────────────────── */
