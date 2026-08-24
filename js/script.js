@@ -46,8 +46,9 @@ function toggleTheme() {
 const galleryItems = [
   // Commented out per Paydreanne + Jax review — weakest work on the home page. Kept here, not deleted, in case any get swapped back in later.
   // { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf9444-mKww4Zq7y434RsMp.webp', model: 'Lexus IS F Sport', detail: '@hendricklexusnorthlake', slug: 'lexus-is-f-sport' },
+  { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf8261-sTvvBdinSPEPBgpM.webp', model: '1979 Chevy El Camino', detail: 'Mr. Evan', slug: '1979-chevy-el-camino' },
   { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf6785-experimental-TvBW0jlkVcQHiKzH.webp', model: 'Dodge Challenger SRT8', detail: 'Mr. Alberta at Streetside Classics', slug: 'dodge-challenger-srt8' },
-    { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf6500-Ts6Zh68eMMBnYlly.webp', model: 'Lexus IS 350', detail: '@hungis350', slug: 'lexus-is350' },
+  { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf6500-Ts6Zh68eMMBnYlly.webp', model: 'Lexus IS 350', detail: '@hungis350', slug: 'lexus-is350' },
   // { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf9355-25bQ9y32bXFCL2Fl.webp', model: 'Acura Integra Type S', detail: '@charlottemotorspeedway', slug: 'acura-integra-type-s' },
   { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf4663-54xghVWYFGEtuhzj.webp', model: 'BMW iX3', detail: 'Octagon Marketing x BMW', slug: 'bmw-ix3' },
   // { src: 'https://assets.zyrosite.com/Jt4lDSQe2RLluQD3/_dsf8480-GVkbqDnernn7OdMM.webp', model: 'Ford Mustang', detail: '@sky5oh', slug: 'ford-mustang' },
