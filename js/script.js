@@ -45,6 +45,11 @@ function toggleTheme() {
 /* ── HOME GALLERY DATA ──────────────────────────────────────── */
 const galleryItems = [
   // Commented out per Paydreanne + Jax review — weakest work on the home page. Kept here, not deleted, in case any get swapped back in later.
+  { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf2914-v1-jwo2tPtBHjSV8qiA.webp', model: 'Lexus IS 500', detail: '@charlottemotorspeedway', slug: 'lexus-is500-charlottemotorspeedway' },
+  { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf2903-v2-U24kTgpckf1zdryB.webp', model: 'Mustang S197', detail: '@dayvlogz', slug: 'mustang-s197' },
+  { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf1620-9t0gmLH4bQyV3H1H.webp', model: 'LexusLC500', detail: 'Mr. Bill', slug: 'lexus-lc500-bill' },
+  { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf1084-tsmO9uLy7E6M7EpD.webp', model: 'Lexus IS 500', detail: '@_mus2fa', slug: 'lexus-is500-mus2fa'},
+  { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf9810-duOO8dDAbwd6XFJV.webp', model: '1979 Supra Celica', detail: '@79mk1supra', slug: '1979-supra-celica' },
   // { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf9444-mKww4Zq7y434RsMp.webp', model: 'Lexus IS F Sport', detail: '@hendricklexusnorthlake', slug: 'lexus-is-f-sport' },
   { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf8261-sTvvBdinSPEPBgpM.webp', model: '1979 Chevy El Camino', detail: 'Mr. Evan', slug: '1979-chevy-el-camino' },
   { src: 'https://assets.zyrosite.com/kxao4MjzPYjtZ5FS/_dsf6785-experimental-TvBW0jlkVcQHiKzH.webp', model: 'Dodge Challenger SRT8', detail: 'Mr. Alberta at Streetside Classics', slug: 'dodge-challenger-srt8' },
