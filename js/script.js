@@ -1400,7 +1400,7 @@ function initGalleryFX() {
   initChallengerFX();
 }
 
-/* ── INIT ───────────────────────────────────────────────────── */
+/* ── INIT ───────────────────────────────────────────────────-─ */
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.theme-toggle,.mobile-theme-toggle').forEach(btn => btn.addEventListener('click', toggleTheme));
   initAnnounceBar();
